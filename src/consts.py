@@ -1,11 +1,15 @@
 import os, sys
 from dotenv import load_dotenv
+from frappeclient.frappeclient import FrappeClient
 
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 USE_GPT4 = False
 
+URL_ERP = os.getenv("URL_ERP", "")
+USER_ERP = os.getenv("USER_ERP", "")
+PASSWORD_ERP = os.getenv("PASSWORD_ERP", "")
 GLOBAL_HL = os.getenv("GLOBAL_HL", "")
 GLOBAL_GL = os.getenv("GLOBAL_GL", "")
 GLOBAL_LOCATION = os.getenv("GLOBAL_LOCATION", "")

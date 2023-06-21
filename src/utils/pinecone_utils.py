@@ -1,5 +1,5 @@
 import pinecone, openai
-from src import consts
+import consts
 
 
 def pinecone_init(agent):

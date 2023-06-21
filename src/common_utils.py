@@ -1,6 +1,9 @@
 import tiktoken, json, openai
 from datetime import datetime
-from src import consts
+import consts
+
+
+
 
 
 encoding = tiktoken.encoding_for_model("gpt-3.5-turbo" if not consts.USE_GPT4 else "gpt-4")
@@ -44,10 +47,10 @@ def split_answer_and_cot(text):
 
 def get_oneshots():
     one_shots, p_one_shots = [], []
-    with open('memories/one-shots.json', 'r') as f:
+    with open('src/memories/one-shots.json', 'r') as f:
         one_shots += json.loads(f.read())
 
-    with open('memories/private-one-shots.json', 'r') as f:
+    with open('src/memories/private-one-shots.json', 'r') as f:
         p_one_shots += json.loads(f.read())
 
     return one_shots, p_one_shots

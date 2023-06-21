@@ -4,6 +4,8 @@ from colorama import Fore
 from collections import deque
 from common_utils import count_tokens, split_answer_and_cot, get_oneshots, openai_call
 from utils import pinecone_utils, text_processing
+import consts
+
 
 openai.api_key = consts.OPENAI_API_KEY
 
@@ -24,8 +26,11 @@ class AutonomousAgent:
             self.indexes,
             self.focus,
             self.get_serp_query_result,
+            self.get_erp_api_result,
             self.current_task
-        ) = (objective, [], prompts.chore_prompt, [], 1, openai_call, deque([]), {}, "", serp_api.get_serp_query_result, "")
+        ) = (objective, [], prompts.chore_prompt, [], 1, openai_call, deque([]), {},
+             "", serp_api.get_serp_query_result, serp_api.get_erp_api_result, "")
+    
 
     def get_current_state(self):
         # filter properties to avoid adiction
@@ -66,7 +71,8 @@ class AutonomousAgent:
                     self.get_current_state,
                     current_task,
                     [one_shot for one_shot in all_one_shots if one_shot["memory_id"] in one_shot_example_names] if one_shot_example_names is not None else '',
-                    self.task_list
+                    self.task_list,
+
                 )
             # print(Fore.LIGHTCYAN_EX + prompt + Fore.RESET)
             changes = openai_call(
@@ -104,7 +110,7 @@ class AutonomousAgent:
                                     f"My answer:", max_tokens=2000)))
                     }
                 )
-                with open("memories/one-shots.json", 'w') as f:
+                with open("src/memories/one-shots.json", 'w') as f:
                     f.write(json.dumps(one_shots, indent=True, ensure_ascii=False))
 
         else:
@@ -185,3 +191,324 @@ class AutonomousAgent:
 
     def generate_large_text(self, instruction, max_tokens_lenghts=10000):
         return text_processing.generate_large_text(instruction, max_tokens_lenghts=10000)
+    
+    def erpnext_get_records_list(
+        self,
+        doctype,
+        fields=None,
+        filters=None,
+        order_by=None,
+        limit_start=None,
+        limit_page_length=None,
+        parent=None,
+        debug=None,
+        as_dict=None,
+        or_filters=None):
+        """Returns a list of records by filters, fields, ordering and limit
+
+        :param doctype: DocType of the data to be queried
+        :param fields: fields to be returned. Default is `name`
+        :param filters: filter list by this dict
+        :param order_by: Order by this fieldname
+        :param limit_start: Start at this index
+        :param limit_page_length: Number of records to be returned (default 20)"""
+
+        return self.get_erp_api_result(
+            'get_list',
+            doctype=doctype,
+            fields=fields,
+            filters=filters,
+            order_by=order_by,
+            limit_start=limit_start,
+            limit_page_length=limit_page_length,
+            parent=parent,
+            debug=debug,
+            as_dict=as_dict,
+            or_filters=or_filters
+        )
+    
+    def erpnext_get_records_count(self, doctype, filters=None):
+        """Returns the number of records that matches a filter
+        
+        :param doctype: DocType of the data to be queried.
+        :param filters: filter list by this dict
+        """
+
+        return self.get_erp_api_result(
+            'get_list',
+            doctype=doctype,
+            filters=filters
+        )
+    
+    def erpnext_get_record(self, doctype, filters=None, parent=None):
+        """Returns a document by name or filters
+
+        :param doctype: DocType of the document to be returned
+        :param name: return document of this `name`
+        :param filters: If name is not set, filter by these values and return the first match"""
+
+        return self.get_erp_api_result(
+            'get',
+            doctype=doctype,
+            filters=filters,
+            parent=parent
+        )
+    
+    def erpnext_get_field_value(self, doctype, fieldname, filters=None, as_dict=True, debug=False, parent=None):
+        """Returns a field value form a document
+
+        :param doctype: DocType to be queried
+        :param fieldname: Field to be returned (default `name`)
+        :param filters: dict or string for identifying the record"""
+
+        return self.get_erp_api_result(
+            'get_value',
+            doctype=doctype,
+            fieldname=fieldname,
+            filters=filters,
+            as_dict=as_dict,
+            debug=debug,
+            parent=parent
+        )
+    
+    def erpnext_get_field_single_value(self, doctype, field):
+        """Returns a single field value form a document"""
+
+        return self.get_erp_api_result(
+            'get_single_value',
+            doctype=doctype,
+            field=field
+        )
+    
+    def erpnext_set_field_value(self, doctype, name, fieldname, value=None):
+        """Set a field value using get_doc, group of values
+
+        :param doctype: DocType of the document
+	    :param name: name of the document
+	    :param fieldname: fieldname string or JSON / dict with key value pair
+	    :param value: value if fieldname is JSON / dict"""
+
+        return self.get_erp_api_result(
+            'set_value',
+            doctype=doctype,
+            name=name,
+            fieldname=fieldname,
+            value=value
+        )
+    
+    def erpnext_insert_doc(self, doc=None):
+        """Insert a document
+        
+        param doc: JSON or dict object to be inserted"""
+
+        return self.get_erp_api_result(
+            'insert',
+            doc=doc
+        )
+    
+    def erpnext_insert_many_docs(self, docs=None):
+        """Insert multiple documents
+
+	    :param docs: JSON or list of dict objects to be inserted in one request"""
+
+        return self.get_erp_api_result(
+            'insert_many',
+            docs=docs
+        )
+
+    def erpnext_update_doc(self, doc):
+        """Update (save) an existing document
+
+	    :param doc: JSON or dict object with the properties of the document to be updated"""
+
+        return self.get_erp_api_result(
+            'save',
+            doc=doc
+        )
+    
+    def erpnext_rename_doc(self, doctype, old_name, new_name, merge=False):
+        """Rename document
+
+        :param doctype: DocType of the document to be renamed
+	    :param old_name: Current `name` of the document to be renamed
+	    :param new_name: New `name` to be set"""
+
+        return self.get_erp_api_result(
+            'rename_doc',
+            doctype=doctype,
+            old_name=old_name,
+            new_name=new_name,
+            merge=merge
+        )
+
+
+    def erpnext_cancel_doc(self, doctype, name):
+        """Cancel a document
+	    :param doctype: DocType of the document to be cancelled
+	    :param name: name of the document to be cancelled"""
+
+        return self.get_erp_api_result(
+            'cancel',
+            doctype=doctype,
+            name=name
+        )
+    
+
+    def erpnext_delete_doc(self, doctype, name):
+        """Delete a remote document
+
+        :param doctype: DocType of the document to be deleted
+        :param name: name of the document to be deleted"""       
+
+        return self.get_erp_api_result(
+            'delete',
+            doctype=doctype,
+            name=name
+        )
+    
+    def erpnext_bulk_update_doc(self, docs):
+        """Bulk update documents
+
+	    :param docs: JSON list of documents to be updated remotely. Each document must have `docname` property"""
+
+        return self.get_erp_api_result(
+            'bulk_update',
+            docs=docs
+        )
+    
+    def erpnext_has_permission_doc(self, doctype, docname, perm_type="read"):
+        """Returns a JSON with data whether the document has the requested permission
+        
+        :param doctype: DocType of the document to be checked
+	    :param docname: `name` of the document to be checked
+	    :param perm_type: one of `read`, `write`, `create`, `submit`, `cancel`, `report`. Default is `read`"""
+
+        return self.get_erp_api_result(
+            'has_permission',
+            doctype=doctype,
+            docname=docname,
+            perm_type=perm_type
+        )
+    
+    def erpnext_get_doc_permissions(self, doctype, docname):
+        """Returns an evaluated document permissions dict like `{"read":1, "write":1}`
+
+	    :param doctype: DocType of the document to be evaluated
+	    :param docname: `name` of the document to be evaluated"""
+
+        return self.get_erp_api_result(
+            'get_doc_permissions',
+            doctype=doctype,
+            docname=docname
+        )
+    
+    def erpnext_get_password_property(self, doctype, name, fieldname):
+        """Return a password type property. Only applicable for System Managers
+
+	    :param doctype: DocType of the document that holds the password
+	    :param name: `name` of the document that holds the password
+	    :param fieldname: `fieldname` of the password property"""
+
+        return self.get_erp_api_result(
+            'get_password',
+            doctype=doctype,
+            name=name,
+            fieldname=fieldname
+        )
+    
+    def erpnext_get_js_code(self, items):
+        """Return a password type property. Only applicable for System Managers
+
+	    :param doctype: DocType of the document that holds the password
+	    :param name: `name` of the document that holds the password
+	    :param fieldname: `fieldname` of the password property"""
+
+        return self.get_erp_api_result(
+            'get_js',
+            items=items
+        )
+    
+    def erpnext_get_default_time_zone(self):
+        """Return default time zone"""
+
+        return self.get_erp_api_result(
+            'get_time_zone'
+        )
+
+    def erpnext_attach_file_to_document(
+        self,
+        filename=None,
+        filedata=None,
+        doctype=None,
+        docname=None,
+        folder=None,
+        decode_base64=False,
+        is_private=None,
+        docfield=None):
+
+        """Attach a file to Document
+
+	    :param filename: filename e.g. test-file.txt
+	    :param filedata: base64 encode filedata which must be urlencoded
+	    :param doctype: Reference DocType to attach file to
+	    :param docname: Reference DocName to attach file to
+	    :param folder: Folder to add File into
+	    :param decode_base64: decode filedata from base64 encode, default is False
+    	:param is_private: Attach file as private file (1 or 0)
+	    :param docfield: file to attach to (optional)"""
+
+        return self.get_erp_api_result(
+            'attach_file',
+            filename=filename,
+            filedata=filedata,
+            doctype=doctype,
+            docname=docname,
+            folder=folder,
+            decode_base64=decode_base64,
+            is_private=is_private,
+            docfield=docfield
+        )
+    
+    def erpnext_verify_document_amended(self, doctype, docname):
+        """Checks if the document has been changed"""
+
+        return self.get_erp_api_result(
+            'is_document_amended',
+            doctype=doctype,
+            docname=docname
+        )
+    
+    def erpnext_validate_link(self, doctype: str, docname: str, fields=None):
+        """Check if the link is valid"""
+
+        return self.get_erp_api_result(
+            'validate_link',
+            doctype=doctype,
+            docname=docname,
+            fields=fields
+        )
+    
+    def erpnext_insert_doc_return_object(self, doc):
+        """Inserts document and returns parent document object with appended child document
+	    if `doc` is child document else returns the inserted document object
+
+        :param doc: doc to insert (dict)"""
+
+        return self.get_erp_api_result(
+            'insert_doc',
+            doc=doc
+        )
+    
+    def erpnext_delete_doc_child_table(self, doctype, name):
+        """Deletes document
+	    if doctype is a child table, then deletes the child record using the parent doc
+	    so that the parent doc's `on_update` is called"""
+
+        return self.get_erp_api_result(
+            'delete_doc',
+            doctype=doctype,
+            name=name
+        )
+
+    
+    

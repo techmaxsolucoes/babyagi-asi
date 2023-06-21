@@ -5,6 +5,7 @@ from collections import deque
 from utils.pinecone_utils import pinecone_init
 
 
+
 def save_as_json(agent: AutonomousAgent, filepath):
     with open(filepath, 'w') as f:
         f.write(json.dumps({

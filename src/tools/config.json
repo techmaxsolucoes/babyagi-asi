@@ -22,5 +22,10 @@
   "memory_agent": {
     "prompt": "- self.memory_agent(caller:str, content:str, goal:goal) - str or True if there's no return string. This agent can handle memory I/O and can create severals types of memories. Avoid using this;\n",
     "enabled": false
+  },
+  "erpnext_get_records_list": {
+    "prompt": "- self.erpnext_get_records_list(doctype:str, ?fields:list, ?filters:list, ?order_by:str, ?limit_start:int, ?limit_page_length:int, ?parent:str, ?or_filters:list) -> list[dict] - Returns a list of records by filters, fields, ordering and limit",
+    "enabled": true
   }
 }
+
