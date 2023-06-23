@@ -1,6 +1,7 @@
 import colorama
 from colorama import Fore
 from serpapi import GoogleSearch
+import fuckit
 
 from consts import SERP_API_KEY, GLOBAL_HL, GLOBAL_GL, GLOBAL_LOCATION
 import consts
@@ -30,12 +31,15 @@ def get_serp_query_result(query: str, n: int = 1, engine: str = 'GoogleSearch') 
 
 
 ERPCLIENT = None
+
+@fuckit
 def get_erp_api_result(method, *args, **kwargs):
+    global ERPCLIENT
     if not ERPCLIENT:
         from frappeclient import FrappeClient
 
         ERPCLIENT = FrappeClient(consts.URL_ERP, consts.USER_ERP, consts.PASSWORD_ERP, verify=False)
 
-    return getattr(ERPCLIENT, method, *args, **kwargs)
+    return getattr(ERPCLIENT, method)(*args, **kwargs)
     
     

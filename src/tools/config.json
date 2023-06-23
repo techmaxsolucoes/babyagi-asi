@@ -26,6 +26,10 @@
   "erpnext_get_records_list": {
     "prompt": "- self.erpnext_get_records_list(doctype:str, ?fields:list, ?filters:list, ?order_by:str, ?limit_start:int, ?limit_page_length:int, ?parent:str, ?or_filters:list) -> list[dict] - Returns a list of records by filters, fields, ordering and limit",
     "enabled": true
+  },
+  "erpnext_insert_doc": {
+    "prompt": "- self.erpnext_insert_doc(doc:dict) -> dict - Inserts a new doc from a dict into ERPNext database, the target doctype should be passed as key 'doctype'",
+    "enabled": true
   }
 }
 

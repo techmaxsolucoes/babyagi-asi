@@ -5,6 +5,9 @@ from collections import deque
 from common_utils import count_tokens, split_answer_and_cot, get_oneshots, openai_call
 from utils import pinecone_utils, text_processing
 import consts
+import traceback
+import json
+import sys
 
 
 openai.api_key = consts.OPENAI_API_KEY
@@ -116,8 +119,9 @@ class AutonomousAgent:
         else:
             cot, code = [[o['thoughts'], o['code']] for o in one_shots if o['task'] == current_task][0]
             print(Fore.LIGHTMAGENTA_EX + f"\n\ncodename ExecutionAgent:" + Fore.RESET + f"\nChain of thoughts: {cot}\n\nAnswer:\n{code}")
-            action_func = exec(code, self.__dict__)
-            result = self.action(self)
+            #action_func = exec(code, self.__dict__)
+            #result = self.action(self)
+            result = self.execute_action(code)
 
         self.completed_tasks.append(current_task)
         summarizer_prompt = f"I must summarize the 'working memory' and the last events, I must answer as a chain of thoughts, in first person, in the same verb tense of the 'event'. Working memory: {self.working_memory}, event: {cot} result: {result}. " \
@@ -126,6 +130,12 @@ class AutonomousAgent:
 
         return result
 
+    def execute_action(self, code):
+        command = json.loads(code)
+        action = getattr(self, command["command"])
+        return action(**command["args"])
+
+
     def repl_agent(self, current_task, changes):
         code, cot = split_answer_and_cot(changes)
         ct = 1
@@ -133,11 +143,20 @@ class AutonomousAgent:
         reasoning = changes
         while True:
             try:
-                action_func = exec(code, self.__dict__)
-                result = self.action(self)
+                result = self.execute_action(code)
                 return result, code, cot
             except Exception as e:
-                print(Fore.RED + f"\n\nFIXING AN ERROR: {e}\n" + Fore.RESET)
+                if consts.DEBUG:
+                    print(Fore.RED + f"\n\nERROR: {e}\n" + Fore.RESET)
+                    print(code)
+                    print('\n\n')
+                    traceback.print_tb(e.__traceback__)
+                    if input('WANNA DEBUG THE CODE? Y/n: ') in ('YysS'):
+                        import pdb
+                        pdb.set_trace()
+                    if input('WANNA CONTINUE? y/N: ') not in ('YysS'):
+                        sys.exit(1)
+                print(Fore.RED + f"\n\nFIXING AN ERROR: {e.__name__} {e}\n" + Fore.RESET)
                 print(f"{ct} try")
 
                 prompt = prompts.fix_agent(current_task, code, cot, e)

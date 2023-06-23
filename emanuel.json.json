@@ -1,0 +1,9 @@
+{
+    "objective": "I need to complete the first task", 
+    "working_memory": "My working memory is still empty, and my last event was to search for 'Emanuel Ara\u00fajo Santana' in the ERP leads. To do this, I can use the erpnext_get_records_list tool, which allows me to search for leads by passing the 'Lead' doctype and a filter with the name 'Emanuel Ara\u00fajo Santana'. Once I execute the search, I will get a JSON with the result. If there were any errors in the process or any fix to be made, I will take note of it and use it as a learning opportunity to improve my performance in the future.", 
+    "completed_tasks": ["Do a search on 'Emanuel Ara\u00fajo Santana' in the ERP leads"], 
+    "task_id_counter": 1, 
+    "task_list": [], 
+    "indexes": [], 
+    "focus": ""
+}
