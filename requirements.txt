@@ -6,4 +6,5 @@ psutil==5.9.4
 python-dotenv==1.0.0
 tiktoken==0.3.3
 bs4
-frappeclient
+frappe-client
+fuckit

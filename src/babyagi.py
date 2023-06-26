@@ -133,7 +133,7 @@ class AutonomousAgent:
     def execute_action(self, code):
         command = json.loads(code)
         action = getattr(self, command["command"])
-        return action(**command["args"])
+        return action(command["args"])
 
 
     def repl_agent(self, current_task, changes):

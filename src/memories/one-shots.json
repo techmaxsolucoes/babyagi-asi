@@ -1,18 +1,1 @@
-[
- {
-  "memory_id": "os-000000001",
-  "objective": "I need to complete the first task",
-  "task": "Do a search on 'Emanuel Araújo Santana' in the ERP leads",
-  "thoughts": "- I need to search for 'Emanuel Araújo Santana' in the ERP leads.\n- I can use the erpnext_get_records_list tool to search for leads.\n- I need to pass the 'Lead' doctype and a filter with the name 'Emanuel Araújo Santana'.\n- I will return a JSON with the result of the search.",
-  "code": "{\n    \"command\": \"erpnext_get_records_list\",\n    \"args\": {\n        \"doctype\": \"Lead\",\n        \"filters\": [[\"Lead\", \"name\", \"like\", \"%Emanuel Araújo Santana%\"]],\n        \"limit_page_length\": 10\n    }\n}",
-  "keywords": "search, ERP leads, Emanuel Araújo Santana, get records list, Lead, name, filters, limit page length, python"
- },
- {
-  "memory_id": "os-000000002",
-  "objective": "I need to complete the list of tasks",
-  "task": "Create a Todo to next friday, for the Lead of 'Emanuel Araújo Santana'",
-  "thoughts": "- I need to create a Todo for the Lead of 'Emanuel Araújo Santana'.\n- I can use the erpnext_insert_doc tool to create a new document in ERPNext.\n- I need to pass the 'ToDo' doctype and a dictionary with the required fields.\n- I will return a JSON with the result of the insertion.",
-  "code": "{\n    \"command\": \"erpnext_insert_doc\",\n    \"args\": {\n        \"doc\": {\n            \"doctype\": \"ToDo\",\n            \"description\": \"Follow up with Emanuel Araújo Santana\",\n            \"reference_type\": \"Lead\",\n            \"reference_name\": \"Emanuel Araújo Santana\",\n            \"date\": \"2023-06-30\",\n            \"priority\": \"High\"\n        }\n    }\n}",
-  "keywords": "Create, Todo, next friday, Lead, Emanuel Araújo Santana, erpnext_insert_doc, doctype, description, reference_type, reference_name, date, priority, High"
- }
-]
+[]

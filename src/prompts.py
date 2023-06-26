@@ -89,14 +89,15 @@ def change_propagation_agent(objective, changes, get_current_state, ):
     return f"""
 {chore_prompt}
 I am ChangePropagationAgent. ExecutionAgent (which is also me, BabyAGI) has just made a action.
-I must check the changes on internal and external states and communicate again with ExecutionAgent if its action was executed correctly, starting a new loop.
+I must verify the changes in the internal and external states and communicate again with the ExecutionAgent if its action was executed correctly, and if the returned JSON is valid, starting a new loop.
 Expected changes (wrote by ExecutionAgent): {changes}.
 My ultimate Objective: {objective}.
 Current state: {get_current_state()}.
 
-I must check if my ExecutionAgent has completed the task goal or if there's some error in ExecutionAgent logic or code.
+I should check if my ExecutionAgent has completed the task objective or if there are any errors in the ExecutionAgent logic or JSON.
 
 My response will be chained together with the next task (if has next tasks at all) to the execution_agent. 
+Should I just return a valid JSON
 I can't create new tasks. I must just explain the changes to execution_agent:
 """
 
