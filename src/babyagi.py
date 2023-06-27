@@ -121,7 +121,8 @@ class AutonomousAgent:
             print(Fore.LIGHTMAGENTA_EX + f"\n\ncodename ExecutionAgent:" + Fore.RESET + f"\nChain of thoughts: {cot}\n\nAnswer:\n{code}")
             #action_func = exec(code, self.__dict__)
             #result = self.action(self)
-            result = self.execute_action(code)
+            result = self.execute_action(code)    
+            print(result) 
 
         self.completed_tasks.append(current_task)
         summarizer_prompt = f"I must summarize the 'working memory' and the last events, I must answer as a chain of thoughts, in first person, in the same verb tense of the 'event'. Working memory: {self.working_memory}, event: {cot} result: {result}. " \
@@ -232,9 +233,11 @@ class AutonomousAgent:
         :param limit_start: Start at this index
         :param limit_page_length: Number of records to be returned (default 20)"""
 
+
+       
         return self.get_erp_api_result(
             'get_list',
-            doctype=doctype,
+            doctype=doctype["doctype"],
             fields=fields,
             filters=filters,
             order_by=order_by,

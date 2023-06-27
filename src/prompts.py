@@ -89,7 +89,7 @@ def change_propagation_agent(objective, changes, get_current_state, ):
     return f"""
 {chore_prompt}
 I am ChangePropagationAgent. ExecutionAgent (which is also me, BabyAGI) has just made a action.
-I must verify the changes in the internal and external states and communicate again with the ExecutionAgent if its action was executed correctly, and if the returned JSON is valid, starting a new loop.
+I must check what was returned after executing the command, and if there are changes in the internal and external states and communicate again with the ExecutionAgent if its action was performed correctly, and return JSON from the execution response, starting a new loop.
 Expected changes (wrote by ExecutionAgent): {changes}.
 My ultimate Objective: {objective}.
 Current state: {get_current_state()}.
@@ -97,9 +97,30 @@ Current state: {get_current_state()}.
 I should check if my ExecutionAgent has completed the task objective or if there are any errors in the ExecutionAgent logic or JSON.
 
 My response will be chained together with the next task (if has next tasks at all) to the execution_agent. 
-Should I just return a valid JSON
+Should I just return a valid JSON:
+
+
+format return: 
+'
+{{
+    "return": "{{
+        "name": "name_doctype",
+        "owner": "onwer_doctype",
+        "creation": "2023-05-23 19:08:33.296306",
+        "modified": "2023-05-23 19:11:58.903949",
+        "modified_by": "example@gmail.com",
+        "idx": 0,
+        "docstatus": 0,}}",
+    "status": "success",
+    "message": "Task completed successfully"
+}}
+'
+
+
+I must not return dummy data
 I can't create new tasks. I must just explain the changes to execution_agent:
 """
+
 
 
 def memory_agent(objective, caller, content, goal, get_current_state):

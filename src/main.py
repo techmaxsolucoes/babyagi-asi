@@ -87,6 +87,7 @@ if __name__ == "__main__":
             result = AI.execution_agent(task["task_name"], root=True)
             changes = AI.change_propagation_agent(result)
 
+
             print(Fore.YELLOW + "\n*TASK RESULT*\n" + Fore.RESET)
             print(Fore.MAGENTA+"\n\ncodename ChangePropagationAgent:"+Fore.RESET+f"\n{changes}")
 
