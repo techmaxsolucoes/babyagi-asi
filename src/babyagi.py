@@ -134,7 +134,7 @@ class AutonomousAgent:
     def execute_action(self, code):
         command = json.loads(code)
         action = getattr(self, command["command"])
-        return action(command["args"])
+        return action(**command["args"])
 
 
     def repl_agent(self, current_task, changes):
@@ -219,11 +219,12 @@ class AutonomousAgent:
         filters=None,
         order_by=None,
         limit_start=None,
-        limit_page_length=None,
-        parent=None,
-        debug=None,
-        as_dict=None,
-        or_filters=None):
+        limit_page_length=20,
+        #parent=None,
+        #debug=False,
+        #as_dict=True,
+        #or_filters=None
+        ):
         """Returns a list of records by filters, fields, ordering and limit
 
         :param doctype: DocType of the data to be queried
@@ -237,16 +238,12 @@ class AutonomousAgent:
        
         return self.get_erp_api_result(
             'get_list',
-            doctype=doctype["doctype"],
+            doctype=doctype,
             fields=fields,
             filters=filters,
             order_by=order_by,
-            limit_start=limit_start,
-            limit_page_length=limit_page_length,
-            parent=parent,
-            debug=debug,
-            as_dict=as_dict,
-            or_filters=or_filters
+            limit_start=limit_start, 
+            limit_page_length=limit_page_length
         )
     
     def erpnext_get_records_count(self, doctype, filters=None):
@@ -257,7 +254,7 @@ class AutonomousAgent:
         """
 
         return self.get_erp_api_result(
-            'get_list',
+            'get_count',
             doctype=doctype,
             filters=filters
         )
@@ -288,9 +285,9 @@ class AutonomousAgent:
             doctype=doctype,
             fieldname=fieldname,
             filters=filters,
-            as_dict=as_dict,
-            debug=debug,
-            parent=parent
+            #as_dict=as_dict,
+            #debug=debug,
+            #parent=parent
         )
     
     def erpnext_get_field_single_value(self, doctype, field):

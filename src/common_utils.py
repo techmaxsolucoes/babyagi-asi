@@ -37,7 +37,7 @@ def count_tokens(text):
 
 
 def split_answer_and_cot(text):
-    start_index = text.lower().index("answer:")+7
+    start_index = text.lower().index("answer")+7
     end_index = text.lower().rfind("note:")
 
     cot = text[:start_index]

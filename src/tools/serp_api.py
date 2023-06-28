@@ -34,9 +34,7 @@ ERPCLIENT = None
 
 @fuckit
 def get_erp_api_result(method, *args, **kwargs):
-    print("=-=-=-=-=-=-=")
     print(kwargs)
-    print("=-=-=-=-=-=-=")
     global ERPCLIENT
     if not ERPCLIENT:
         from frappeclient import FrappeClient

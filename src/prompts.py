@@ -100,23 +100,16 @@ My response will be chained together with the next task (if has next tasks at al
 Should I just return a valid JSON:
 
 
-format return: 
+This must be the format of my response:
 '
 {{
-    "return": "{{
-        "name": "name_doctype",
-        "owner": "onwer_doctype",
-        "creation": "2023-05-23 19:08:33.296306",
-        "modified": "2023-05-23 19:11:58.903949",
-        "modified_by": "example@gmail.com",
-        "idx": 0,
-        "docstatus": 0,}}",
-    "status": "success",
-    "message": "Task completed successfully"
+    "return": "{changes}",
+    "status": "<status_task>",
+    "message": "<my_message>"
 }}
 '
 
-
+I should only return the JSON, and all comments should be placed in the "message" key
 I must not return dummy data
 I can't create new tasks. I must just explain the changes to execution_agent:
 """
