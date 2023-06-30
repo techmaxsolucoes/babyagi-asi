@@ -28,8 +28,23 @@
     "enabled": true
   },
   "erpnext_insert_doc": {
-    "prompt": "- self.erpnext_insert_doc(doc:dict) -> dict - Inserts a new doc from a dict into ERPNext database, the target doctype should be passed as key 'doctype'",
+    "prompt": "- self.erpnext_insert_doc(doc:dict) -> dict - Inserts a new doc from a dict into ERPNext database, the target doctype should be passed as key 'doctype', example {'doc':{'doctype':'example'}",
+    "enabled": true
+  },
+  "erpnext_get_record": {
+    "prompt": "- self.erpnext_get_record(doctype:str, ?name:str, ?filters:dict) -> dict - Returns a document by name or filters",
+    "enabled": true
+  },
+  "erpnext_get_records_count": {
+    "prompt": "- self.erpnext_get_records_count(doctype:str, ?filters:dict) -> int - Returns the number of docs that matches a filter",
+    "enabled": false
+  },
+  "erpnext_get_field_value": {
+    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> list - Returns a field value form a document",
     "enabled": true
   }
+  
+
+
 }
 

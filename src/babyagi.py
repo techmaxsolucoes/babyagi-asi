@@ -122,7 +122,7 @@ class AutonomousAgent:
             #action_func = exec(code, self.__dict__)
             #result = self.action(self)
             result = self.execute_action(code)    
-            print(result) 
+            #print(result) 
 
         self.completed_tasks.append(current_task)
         summarizer_prompt = f"I must summarize the 'working memory' and the last events, I must answer as a chain of thoughts, in first person, in the same verb tense of the 'event'. Working memory: {self.working_memory}, event: {cot} result: {result}. " \
@@ -246,20 +246,22 @@ class AutonomousAgent:
             limit_page_length=limit_page_length
         )
     
+    """
     def erpnext_get_records_count(self, doctype, filters=None):
-        """Returns the number of records that matches a filter
+        ""Returns the number of records that matches a filter
         
         :param doctype: DocType of the data to be queried.
         :param filters: filter list by this dict
-        """
+        ""
 
         return self.get_erp_api_result(
             'get_count',
             doctype=doctype,
             filters=filters
         )
+    """
     
-    def erpnext_get_record(self, doctype, filters=None, parent=None):
+    def erpnext_get_record(self, doctype, name=None, filters=None, parent=None):
         """Returns a document by name or filters
 
         :param doctype: DocType of the document to be returned
@@ -267,10 +269,11 @@ class AutonomousAgent:
         :param filters: If name is not set, filter by these values and return the first match"""
 
         return self.get_erp_api_result(
-            'get',
+            'get_doc',
+            name=name,
             doctype=doctype,
             filters=filters,
-            parent=parent
+            #parent=parent
         )
     
     def erpnext_get_field_value(self, doctype, fieldname, filters=None, as_dict=True, debug=False, parent=None):

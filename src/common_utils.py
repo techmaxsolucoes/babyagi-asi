@@ -37,11 +37,11 @@ def count_tokens(text):
 
 
 def split_answer_and_cot(text):
-    start_index = text.lower().index("answer")+7
-    end_index = text.lower().rfind("note:")
-
+    start_index = text.lower().index("answer")+8
+    end_index = text.lower().rfind("note:")-1
     cot = text[:start_index]
-    code = text[start_index:end_index if end_index != -1 else len(text)].replace("```", "")
+    code = text[start_index:end_index if end_index != -2 else len(text)].replace("```", "")
+    print(code)
     return [code, cot]
 
 

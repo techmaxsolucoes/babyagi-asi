@@ -2,33 +2,9 @@
  {
   "memory_id": "os-000000001",
   "objective": "I need to complete the list of tasks",
-  "task": "Create a Todo to next friday, description: 'Emanuel Araújo Santana'",
-  "thoughts": "- I need to create a new task to complete by next friday, with the description 'Emanuel Araújo Santana'.\n- I can add this task to the 'To-do tasks list' in the current state.\n- I can use the 'erpnext_insert_doc' tool to insert a new task document in ERPNext.",
-  "code": "{\n    \"command\": \"erpnext_insert_doc\",\n    \"args\": {\n        \"doctype\": \"ToDo\",\n        \"description\": \"Emanuel Araújo Santana\",\n        \"date\": \"2023-07-04\",\n        \"priority\": \"Medium\"\n    }\n}",
-  "keywords": "create, Todo, next friday, Emanuel Araújo Santana, erpnext, insert_doc, doctype, date, priority, Medium"
- },
- {
-  "memory_id": "os-000000002",
-  "objective": "I need to complete the list of tasks",
-  "task": "Return me the leads of the erpnext Lead doctype",
-  "thoughts": "- I need to get the leads from the erpnext Lead doctype.\n- I can use the erpnext_get_records_list tool to get a list of records by filters, fields, ordering, and limit.\n- I need to pass the doctype as 'Lead' and set the filters to null to retrieve all leads.\n- I will set the limit to 100 to avoid overloading the system.",
-  "code": "{\n\"command\": \"erpnext_get_records_list\",\n\"args\": {\"doctype\": \"Lead\", \"filters\": null, \"limit_start\": 0, \"limit_page_length\": 100}\n}",
-  "keywords": "erpnext, Lead, get_records_list, filters, limit_start, limit_page_length, python"
- },
- {
-  "memory_id": "os-000000003",
-  "objective": "I need to complete the list of tasks",
-  "task": "Return me the 'Emanuel Araújo Santana' of the erpnext Lead doctype",
-  "thoughts": "- I need to get the lead with the name 'Emanuel Araújo Santana' from the erpnext Lead doctype.\n- I can use the 'erpnext_get_records_list' tool to get a list of records by filters, fields, ordering, and limit.\n- I need to pass the doctype as 'Lead' and set the filters to {'name': 'Emanuel Araújo Santana'} to retrieve the specific lead.",
-  "code": "{\n\"command\": \"erpnext_get_records_list\",\n\"args\": {\"doctype\": \"Lead\", \"filters\": {\"name\": \"Emanuel Araújo Santana\"}, \"limit_start\": 0, \"limit_page_length\": 1}\n}",
-  "keywords": "erpnext, Lead, get_records_list, Emanuel Araújo Santana, filters, name, limit_start, limit_page_length"
- },
- {
-  "memory_id": "os-000000004",
-  "objective": "I need to complete the list of tasks",
-  "task": "Create a Todo to next friday, for the Lead of 'Emanuel Araújo Santana'",
-  "thoughts": "- I need to create a new task to complete by next Friday for the Lead of 'Emanuel Araújo Santana'.\n- I can add this task to the 'To-do tasks list' in the current state.\n- I can use the 'erpnext_insert_doc' tool to insert a new task document in ERPNext.",
-  "code": "{\n    \"command\": \"erpnext_insert_doc\",\n    \"args\": {\n        \"doctype\": \"ToDo\",\n        \"description\": \"Emanuel Araújo Santana\",\n        \"date\": \"2023-07-07\",\n        \"priority\": \"Medium\"\n    }\n}",
-  "keywords": "create, Todo, next friday, Lead, Emanuel Araújo Santana, erpnext_insert_doc, doctype, ToDo, description, date, priority, Medium"
+  "task": "Tell me all 'chat_profile' of Lead doctype, with 'erpnext_get_field_value' method",
+  "thoughts": "- I need to use the 'erpnext_get_field_value' method to retrieve the 'chat_profile' field of the 'Lead' doctype.\n- I should check the available indexes in the current state to see if the 'erpnext_get_field_value' method is available.\n- If the method is available, I can proceed with the task.\n- I will create an action to call the 'erpnext_get_field_value' method with the appropriate arguments.",
+  "code": "{\n  \"command\": \"erpnext_get_field_value\",\n  \"args\": {\n    \"doctype\": \"Lead\",\n    \"fieldname\": \"chat_profile\"\n  }\n}",
+  "keywords": "get chat_profile of Lead, erpnext_get_field_value, Lead doctype"
  }
 ]
