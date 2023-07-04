@@ -2,9 +2,9 @@
  {
   "memory_id": "os-000000001",
   "objective": "I need to complete the list of tasks",
-  "task": "Tell me all 'chat_profile' of Lead doctype, with 'erpnext_get_field_value' method",
-  "thoughts": "- I need to use the 'erpnext_get_field_value' method to retrieve the 'chat_profile' field of the 'Lead' doctype.\n- I should check the available indexes in the current state to see if the 'erpnext_get_field_value' method is available.\n- If the method is available, I can proceed with the task.\n- I will create an action to call the 'erpnext_get_field_value' method with the appropriate arguments.",
-  "code": "{\n  \"command\": \"erpnext_get_field_value\",\n  \"args\": {\n    \"doctype\": \"Lead\",\n    \"fieldname\": \"chat_profile\"\n  }\n}",
-  "keywords": "get chat_profile of Lead, erpnext_get_field_value, Lead doctype"
+  "task": "In the 'ToDo' doctype I need to go to the '90091998f1' doctype and change the 'priority' field to 'High', I must use the 'erpnext_set_field_value' method",
+  "thoughts": "1. The current task is to change the 'priority' field to 'High' in the 'ToDo' doctype.\n2. To achieve this, I need to use the 'erpnext_set_field_value' method.\n3. I will set the 'doctype' parameter to 'ToDo', the 'docname' parameter to '90091998f1', the 'fieldname' parameter to 'priority', and the 'value' parameter to 'High'.\n4. I will call the 'erpnext_set_field_value' method with the provided parameters.\n5. I will check if the method call was successful or not.",
+  "code": "{\n  \"command\": \"erpnext_set_field_value\",\n  \"args\": {\n    \"doctype\": \"ToDo\",\n    \"docname\": \"90091998f1\",\n    \"fieldname\": \"priority\",\n    \"value\": \"High\"\n  }\n}",
+  "keywords": "ToDo, 90091998f1, priority, High, erpnext_set_field_value, doctype, docname, fieldname, value"
  }
 ]

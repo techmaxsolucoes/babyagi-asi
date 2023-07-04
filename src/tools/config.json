@@ -40,11 +40,16 @@
     "enabled": false
   },
   "erpnext_get_field_value": {
-    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> list - Returns a field value form a document",
+    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> dict - Returns a value from one field or more, from a document, the values for finding the document must be passed through the filters, example {'filters':{'name':'NAME0001'}",
+    "enabled": true
+  },
+  "erpnext_get_field_single_value": {
+    "prompt": "- self.erpnext_get_field_single_value(doctype:str, ?field:str) -> dict - Returns a single field value from a document",
+    "enabled": false
+  },
+  "erpnext_set_field_value": {
+    "prompt": "- self.erpnext_set_field_value(doctype:str, ?docname:str, ?fieldname:str, ?value) -> dict - set a field value of a specific doctype",
     "enabled": true
   }
-  
-
-
 }
 

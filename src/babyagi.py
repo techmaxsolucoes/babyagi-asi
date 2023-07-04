@@ -10,6 +10,7 @@ import json
 import sys
 
 
+
 openai.api_key = consts.OPENAI_API_KEY
 
 one_shots, p_one_shots = get_oneshots()
@@ -122,7 +123,7 @@ class AutonomousAgent:
             #action_func = exec(code, self.__dict__)
             #result = self.action(self)
             result = self.execute_action(code)    
-            #print(result) 
+            print(result) 
 
         self.completed_tasks.append(current_task)
         summarizer_prompt = f"I must summarize the 'working memory' and the last events, I must answer as a chain of thoughts, in first person, in the same verb tense of the 'event'. Working memory: {self.working_memory}, event: {cot} result: {result}. " \
@@ -130,7 +131,7 @@ class AutonomousAgent:
         self.working_memory = openai_call(summarizer_prompt)
 
         return result
-
+    
     def execute_action(self, code):
         command = json.loads(code)
         action = getattr(self, command["command"])
@@ -261,7 +262,7 @@ class AutonomousAgent:
         )
     """
     
-    def erpnext_get_record(self, doctype, name=None, filters=None, parent=None):
+    def erpnext_get_record(self, doctype, name='', filters=None, parent=None):
         """Returns a document by name or filters
 
         :param doctype: DocType of the document to be returned
@@ -293,16 +294,18 @@ class AutonomousAgent:
             #parent=parent
         )
     
+    """
     def erpnext_get_field_single_value(self, doctype, field):
-        """Returns a single field value form a document"""
+        ""Returns a single field value form a document""
 
         return self.get_erp_api_result(
             'get_single_value',
             doctype=doctype,
             field=field
         )
-    
-    def erpnext_set_field_value(self, doctype, name, fieldname, value=None):
+    """
+
+    def erpnext_set_field_value(self, doctype, docname, fieldname, value=None):
         """Set a field value using get_doc, group of values
 
         :param doctype: DocType of the document
@@ -313,7 +316,7 @@ class AutonomousAgent:
         return self.get_erp_api_result(
             'set_value',
             doctype=doctype,
-            name=name,
+            docname=docname,
             fieldname=fieldname,
             value=value
         )

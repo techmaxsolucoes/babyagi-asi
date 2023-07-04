@@ -1,7 +1,7 @@
 import tiktoken, json, openai
 from datetime import datetime
 import consts
-
+import json
 
 
 
@@ -37,11 +37,19 @@ def count_tokens(text):
 
 
 def split_answer_and_cot(text):
-    start_index = text.lower().index("answer")+8
-    end_index = text.lower().rfind("note:")-1
-    cot = text[:start_index]
-    code = text[start_index:end_index if end_index != -2 else len(text)].replace("```", "")
-    print(code)
+    valid_json = is_json(text)
+    if valid_json:
+        text = text.lower()
+        cot = json.loads(text)["chain of thoughts"]
+        code = json.loads(text)["answer"] 
+    else:
+        start_index = text.lower().index("answer")+8
+        end_index = text.lower().rfind("note:")-1
+        cot = text[:start_index]
+        code = text[start_index:end_index if end_index != -2 else len(text)].replace("```", "")
+
+
+
     return [code, cot]
 
 
@@ -54,3 +62,10 @@ def get_oneshots():
         p_one_shots += json.loads(f.read())
 
     return one_shots, p_one_shots
+
+def is_json(myjson):
+  try:
+    json.loads(myjson)
+  except ValueError as e:
+    return False
+  return True
