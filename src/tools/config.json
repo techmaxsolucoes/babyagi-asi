@@ -48,7 +48,27 @@
     "enabled": false
   },
   "erpnext_set_field_value": {
-    "prompt": "- self.erpnext_set_field_value(doctype:str, ?docname:str, ?fieldname:str, ?value) -> dict - set a field value of a specific doctype",
+    "prompt": "- self.erpnext_set_field_value(doctype:str, ?docname:str, ?fieldname:str, ?value) -> dict - Set a field value of a specific doctype",
+    "enabled": true
+  },
+  "erpnext_insert_many_docs": {
+    "prompt": "- self.erpnext_insert_many_docs(docs:list[dict]) -> list - Insert multiple documents at once (It is a better option instead of using several 'erpnext_insert_doc'), example - {'docs':[{},{}]}",
+    "enabled": true
+  },
+  "erpnext_update_doc": {
+    "prompt": "- self.erpnext_update_doc(doc:dict) -> dict - Update (save) an existing document",
+    "enabled": true
+  },
+  "erpnext_cancel_doc": {
+    "prompt": "- self.erpnext_cancel_doc(doctype:str, ?name:str) -> dict - Cancel a document",
+    "enabled": false
+  },
+  "erpnext_delete_doc": {
+    "prompt": "- self.erpnext_delete_doc(doctype:str, ?name:str) -> None - Delete a remote document",
+    "enabled": true
+  },
+  "erpnext_bulk_update_doc": {
+    "prompt": "- self.erpnext_bulk_update_doc(docs:list[dict]) -> dict - Update multiple documents at once, the fields 'docname', and 'doctype', are mandatory",
     "enabled": true
   }
 }

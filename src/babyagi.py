@@ -2,7 +2,7 @@ import openai, prompts, consts, os, json, re
 from tools import serp_api
 from colorama import Fore
 from collections import deque
-from common_utils import count_tokens, split_answer_and_cot, get_oneshots, openai_call
+from common_utils import count_tokens, split_answer_and_cot, get_oneshots, openai_call, is_json
 from utils import pinecone_utils, text_processing
 import consts
 import traceback
@@ -105,8 +105,8 @@ class AutonomousAgent:
                         "memory_id": "os-{0:09d}".format(len(one_shots)+1),
                         "objective": self.objective,
                         "task": current_task,
-                        "thoughts": cot[cot.lower().index('chain of thoughts:')+18:cot.lower().index('answer:')].strip(),
-                        "code": code.strip().strip('\n\n'),
+                        "thoughts": cot,
+                        "code": code,
                         "keywords": ', '.join(eval(openai_call("I must analyze the following task name and action and write a list of keywords.\n"
                                     f"Task name: {current_task};\nAction: {code};\n\n"
                                     f"> I must write a python list cointaing strings, each string one relevant keyword that will be used by ExecutionAgent to retrieve this memories when needed."
@@ -133,7 +133,10 @@ class AutonomousAgent:
         return result
     
     def execute_action(self, code):
-        command = json.loads(code)
+        try:
+            command = json.loads(code)
+        except:
+            command = json.loads(code[:-1])
         action = getattr(self, command["command"])
         return action(**command["args"])
 
@@ -347,7 +350,7 @@ class AutonomousAgent:
 	    :param doc: JSON or dict object with the properties of the document to be updated"""
 
         return self.get_erp_api_result(
-            'save',
+            'update',
             doc=doc
         )
     

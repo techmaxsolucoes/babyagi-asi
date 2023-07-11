@@ -2,6 +2,8 @@ import tiktoken, json, openai
 from datetime import datetime
 import consts
 import json
+from tools import serp_api
+
 
 
 
@@ -39,7 +41,6 @@ def count_tokens(text):
 def split_answer_and_cot(text):
     valid_json = is_json(text)
     if valid_json:
-        text = text.lower()
         cot = json.loads(text)["chain of thoughts"]
         code = json.loads(text)["answer"] 
     else:
@@ -48,8 +49,9 @@ def split_answer_and_cot(text):
         cot = text[:start_index]
         code = text[start_index:end_index if end_index != -2 else len(text)].replace("```", "")
 
-
-
+    print("=-=-=-=-=-=-=-=-=-=")
+    print(code)
+    print("=-=-=-=-=-=-=-=-=-=")
     return [code, cot]
 
 
@@ -62,6 +64,14 @@ def get_oneshots():
         p_one_shots += json.loads(f.read())
 
     return one_shots, p_one_shots
+
+def recover_fields(namedoc):
+    response = serp_api.get_erp_api_result('get_doc', doctype="DocType", name=namedoc)
+    fields = []
+    for fld in response["fields"]:
+        if fld["fieldtype"] != "Section Break" and fld["fieldtype"] != "Column Break":
+            fields.append(fld["fieldname"])   
+    return fields
 
 def is_json(myjson):
   try:

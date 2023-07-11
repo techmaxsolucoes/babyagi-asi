@@ -1,4 +1,5 @@
 import platform, psutil, json
+from common_utils import recover_fields
 
 with open('src/tools/config.json', 'r') as f:
     tools = json.loads(f.read())
@@ -68,11 +69,9 @@ Should I check if the task can be done at once or if I need to create more tasks
 My answer must be a JSON.
 
 
-#? ACTION FORMAT
+#? COMMAND FORMAT
 Should I return a valid JSON that contains information and actions that can be performed on the system
 I must implement everything necessary for my current task.
-
-
 '
 {{
 "command": "erpnext_get_record",
@@ -80,8 +79,25 @@ I must implement everything necessary for my current task.
 }}
 '- fictional and simplified example.
 
-? ANSWER
-Format: 'chain of thoughts: [step-by-step reasoning] answer: [valid JSON only]'.
+#? ANSWER
+Format: {{'chain of thoughts': [step-by-step reasoning], 'answer': [valid JSON only(COMMAND FORMAT)]}}'.
+
+#? DOCTYPES
+I can edit, delete and create, only the following doctypes:
+
+- Lead -> A lead is a potential customer who might be interested in your products or services,these are its fields:
+{recover_fields("Lead")}
+
+- ToDO -> a ToDo is a simple tool where you can define the activities to be done. The ToDo List will enlist all the activities assigned to you and by you, these are its fields:
+{recover_fields("ToDo")}
+
+- Opportunity -> When you get a hint that lead is looking for a product/service that you offer, you can convert that lead into an opportunity. You can also create an opportunity against an existing customer. Multiple Opportunities can be collected against a lead or a customer, these are their fields:
+{recover_fields("Opportunity")}
+
+ATTENTION: The only available operations are editing, deleting and creating the following doctypes: Lead, ToDo and Opportunity. It is NOT allowed to use or interact with any other doctypes besides these.
+Keep in mind that any other requests related to unmentioned (or unusable) doctypes cannot be fulfilled.
+
+
 """
 
 
