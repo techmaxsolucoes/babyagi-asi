@@ -80,7 +80,12 @@ I must implement everything necessary for my current task.
 '- fictional and simplified example.
 
 #? ANSWER
-Format: {{'chain of thoughts': [step-by-step reasoning], 'answer': [valid JSON only(COMMAND FORMAT)]}}'.
+Format: 
+{{
+"chain of thoughts": [step-by-step reasoning], 
+"answer": valid JSON only(COMMAND FORMAT)
+}}.
+- Both keys are mandatory
 
 #? DOCTYPES
 I can edit, delete and create, only the following doctypes:

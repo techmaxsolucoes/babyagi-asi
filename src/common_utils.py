@@ -39,15 +39,11 @@ def count_tokens(text):
 
 
 def split_answer_and_cot(text):
-    valid_json = is_json(text)
-    if valid_json:
-        cot = json.loads(text)["chain of thoughts"]
-        code = json.loads(text)["answer"] 
-    else:
-        start_index = text.lower().index("answer")+8
-        end_index = text.lower().rfind("note:")-1
-        cot = text[:start_index]
-        code = text[start_index:end_index if end_index != -2 else len(text)].replace("```", "")
+    print("*************************")
+    print(text)
+    print("*************************")
+    cot = json.loads(text)["chain of thoughts"]
+    code = json.loads(text)["answer"] 
 
     print("=-=-=-=-=-=-=-=-=-=")
     print(code)

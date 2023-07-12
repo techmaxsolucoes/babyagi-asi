@@ -2,9 +2,31 @@
  {
   "memory_id": "os-000000001",
   "objective": "I need to complete the list of tasks",
-  "task": "Eu preciso saber todos os afazeres com alta prioridade",
-  "thoughts": "{'chain of thoughts': ['Check the available doctypes to determine which one has high priority tasks',\n                       'Retrieve all the high priority tasks for the selected doctype',\n                       'Return the list of tasks'],\n 'answer':",
-  "code": " {\"command\": \"erpnext_get_records_list\",\n            \"args\": {\"doctype\": \"ToDo\",\n                     \"filters\": [[\"priority\", \"=\", \"High\"]],\n                     \"order_by\": \"date desc\"}}}",
-  "keywords": "erpnext, get_records_list, ToDo, priority, High, date"
+  "task": "Eu preciso saber somenta a descrição de todos os afazeres com a prioridade média",
+  "thoughts": [
+   "To get the description of all tasks with medium priority, I need to retrieve the 'description' field from the 'ToDo' doctype.",
+   "I can use the 'erpnext_get_records_list' tool to fetch all the 'ToDo' records.",
+   "I will filter the records based on the 'priority' field, where the value is 'Medium'.",
+   "For each record, I will extract the 'description' field and store it in a list.",
+   "Finally, I will return the list of descriptions."
+  ],
+  "code": {
+   "command": "erpnext_get_records_list",
+   "args": {
+    "doctype": "ToDo",
+    "fields": [
+     "description"
+    ],
+    "filters": [
+     [
+      "priority",
+      "=",
+      "Medium"
+     ]
+    ],
+    "limit_page_length": 0
+   }
+  },
+  "keywords": "erpnext_get_records_list, ToDo, description, priority, Medium"
  }
 ]

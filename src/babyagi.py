@@ -2,7 +2,7 @@ import openai, prompts, consts, os, json, re
 from tools import serp_api
 from colorama import Fore
 from collections import deque
-from common_utils import count_tokens, split_answer_and_cot, get_oneshots, openai_call, is_json
+from common_utils import count_tokens, split_answer_and_cot, get_oneshots, openai_call
 from utils import pinecone_utils, text_processing
 import consts
 import traceback
@@ -60,11 +60,11 @@ class AutonomousAgent:
                 f"These oneshots will be injected in execution_agent as instant memories, task memory. I will try to choose {consts.N_SHOT} tasks memories that may help ExA. I will tell the relevant tasks by looking the names and keywords, and imagining what abilities ExA used to produce this memory."
                 f"I must write a list({consts.N_SHOT}) cointaining only the memory_ids of the most relevant one_shots, or a empty list. i.e '[\"one_shot example memory_id\"]' or '[]'."
                 f"I must read the examples' names and choose from 0 to {consts.N_SHOT} by memory_id. "
-                f"I must answer in the format 'CHAIN OF THOUGHTS: here I put a short reasoning;\nANSWER: ['most relevant memory_id']';"
+                f"""I must answer in the format '\{{"chain of thoughts": "here I put a short reasoning", "answer": ['most relevant memory_id']'}};"""
                 f"My answer:", max_tokens=300).strip("'"))
             print(cot)
             pattern = r'\[([^\]]+)\]'
-            matches = re.findall(pattern, code)
+            matches = re.findall(pattern, str(code))
             completion = eval("["+matches[0]+"]") if matches else []
             print(f"\nChosen one-shot example: {completion}\n")
             one_shot_example_names = completion[:consts.N_SHOT] if len(completion) > 0 else None
@@ -133,12 +133,8 @@ class AutonomousAgent:
         return result
     
     def execute_action(self, code):
-        try:
-            command = json.loads(code)
-        except:
-            command = json.loads(code[:-1])
-        action = getattr(self, command["command"])
-        return action(**command["args"])
+        action = getattr(self, code["command"])
+        return action(**code["args"])
 
 
     def repl_agent(self, current_task, changes):
