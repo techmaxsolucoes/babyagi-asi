@@ -40,7 +40,7 @@
     "enabled": false
   },
   "erpnext_get_field_value": {
-    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> dict - Returns a value from one field or more, from a document, the values for finding the document must be passed through the filters, example {'filters':{'name':'NAME0001'}",
+    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> dict - Returns the field of a doctype(example: phone, email, ...), the document is indicated by filters, example {'filters':{'name':'namedocument'}}",    
     "enabled": true
   },
   "erpnext_get_field_single_value": {

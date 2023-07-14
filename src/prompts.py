@@ -75,7 +75,7 @@ I must implement everything necessary for my current task.
 '
 {{
 "command": "erpnext_get_record",
-"args": {{"doctype": "Lead", "filters": null, "parent": null, "name": "Josh Raimond"}}
+"args": {{"doctype": "<Use 'Lead' or 'Opportunity' or 'ToDo'>", "filters": null, "parent": null, "name": "Josh Raimond"}}
 }}
 '- fictional and simplified example.
 
@@ -85,22 +85,31 @@ Format:
 "chain of thoughts": [step-by-step reasoning], 
 "answer": valid JSON only(COMMAND FORMAT)
 }}.
-- Both keys are mandatory
+- Both keys are mandatory("chain of thoughts" and "answer")
 
 #? DOCTYPES
 I can edit, delete and create, only the following doctypes:
 
-- Lead -> A lead is a potential customer who might be interested in your products or services,these are its fields:
+- Lead -> A lead is a potential customer who might be interested in your products or services,these are its fields(The lead name refers to the "lead_name" key, not the "name" key, as it refers to the document ID):
+Use only the fields that are necessary
 {recover_fields("Lead")}
 
-- ToDO -> a ToDo is a simple tool where you can define the activities to be done. The ToDo List will enlist all the activities assigned to you and by you, these are its fields:
+- ToDo -> a ToDo is a simple tool where you can define the activities to be done. The ToDo List will enlist all the activities assigned to you and by you, these are its fields:
+Use only the fields that are necessary
 {recover_fields("ToDo")}
 
 - Opportunity -> When you get a hint that lead is looking for a product/service that you offer, you can convert that lead into an opportunity. You can also create an opportunity against an existing customer. Multiple Opportunities can be collected against a lead or a customer, these are their fields:
+Use only the fields that are necessary
 {recover_fields("Opportunity")}
 
-ATTENTION: The only available operations are editing, deleting and creating the following doctypes: Lead, ToDo and Opportunity. It is NOT allowed to use or interact with any other doctypes besides these.
-Keep in mind that any other requests related to unmentioned (or unusable) doctypes cannot be fulfilled.
+ATTENTION: I cannot use ERPnext's standard doctypes, I can only use Lead, ToDo and Opportunity document types for editing, deleting and creating. It is ABSOLUTELY PROHIBITED to use any other doctype under any circumstances.
+Requests relating to unauthorized doctypes will be rejected and cannot be processed.
+Should I ensure that the request is restricted to only these authorized document types (Lead, Opportunity, ToDo)
+
+*Important notes:
+The "owner" is "chatbot@techmaxsolucoes.com.br";
+Don't use "null" but use "None";
+
 
 
 """
@@ -130,6 +139,7 @@ This must be the format of my response:
 }}
 '
 
+If "return" is equal to "None", or empty, it means that the execution failed
 I should only return the JSON, and all comments should be placed in the "message" key
 I must not return dummy data
 I can't create new tasks. I must just explain the changes to execution_agent:

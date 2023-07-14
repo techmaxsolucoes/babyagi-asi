@@ -28,5 +28,48 @@
    }
   },
   "keywords": "erpnext_get_records_list, ToDo, description, priority, Medium"
+ },
+ {
+  "memory_id": "os-000000002",
+  "objective": "I need to complete the list of tasks",
+  "task": "Definir uma reunião para o Emanuel Araújo Santana na próxima sexta as 9 AM",
+  "thoughts": [
+   "To set up a meeting for Emanuel Araújo Santana next Friday at 9 AM, I need to create a new ToDo document.",
+   "I will set the 'status' field to 'Open' and the 'priority' field to 'High'.",
+   "I will set the 'date' field to the next Friday at 9 AM.",
+   "I will set the 'description' field to 'Meeting with Emanuel Araújo Santana'."
+  ],
+  "code": {
+   "command": "erpnext_insert_doc",
+   "args": {
+    "doc": {
+     "doctype": "ToDo",
+     "status": "Open",
+     "priority": "High",
+     "date": "2023-07-21 09:00:00",
+     "description": "Meeting with Emanuel Araújo Santana"
+    }
+   }
+  },
+  "keywords": "definir, reunião, Emanuel Araújo Santana, próxima sexta, 9 AM"
+ },
+ {
+  "memory_id": "os-000000003",
+  "objective": "I need to complete the list of tasks",
+  "task": "Preciso saber quem é o usuário Emanuel Araújo Santana",
+  "thoughts": [
+   "I can use the 'erpnext_get_record' command to retrieve information about the user Emanuel Araújo Santana.",
+   "I need to pass the 'Lead' doctype to the command and set the 'filters' argument to search for the lead with the name 'Emanuel Araújo Santana'."
+  ],
+  "code": {
+   "command": "erpnext_get_record",
+   "args": {
+    "doctype": "Lead",
+    "filters": {
+     "lead_name": "Emanuel Araújo Santana"
+    }
+   }
+  },
+  "keywords": "erpnext, get record, Lead, Emanuel Araújo Santana"
  }
 ]

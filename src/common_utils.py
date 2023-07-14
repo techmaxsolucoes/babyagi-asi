@@ -3,7 +3,7 @@ from datetime import datetime
 import consts
 import json
 from tools import serp_api
-
+import ast
 
 
 
@@ -42,8 +42,8 @@ def split_answer_and_cot(text):
     print("*************************")
     print(text)
     print("*************************")
-    cot = json.loads(text)["chain of thoughts"]
-    code = json.loads(text)["answer"] 
+    cot = ast.literal_eval(text)["chain of thoughts"]
+    code = ast.literal_eval(text)["answer"] 
 
     print("=-=-=-=-=-=-=-=-=-=")
     print(code)
