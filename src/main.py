@@ -3,7 +3,11 @@ from colorama import Fore
 from babyagi import AutonomousAgent
 from collections import deque
 from utils.pinecone_utils import pinecone_init
-
+import ast
+from tools import serp_api
+from prompts import verify_tasks_agent
+from babyagi import openai_call, count_tokens
+from ast import literal_eval
 
 
 def save_as_json(agent: AutonomousAgent, filepath):
@@ -43,6 +47,16 @@ if __name__ == "__main__":
         AI = AutonomousAgent(objective)
 
         # add tasks manually if .env tasks_list is empty
+        prompt = verify_tasks_agent(consts.TASKS_LIST, consts.OBJECTIVE)
+        new_tasks = openai_call(
+                prompt,
+                .5,
+                4000-count_tokens(prompt),
+        )
+
+        print(new_tasks)
+        consts.TASKS_LIST = literal_eval(new_tasks)
+        print(consts.TASKS_LIST)
         if len(consts.TASKS_LIST) == 0:
             ct = 1
             while True:
@@ -86,12 +100,11 @@ if __name__ == "__main__":
 
             result = AI.execution_agent(task["task_name"], root=True)
             changes = AI.change_propagation_agent(result)
-
-
+            response = ast.literal_eval(changes)
             print(Fore.YELLOW + "\n*TASK RESULT*\n" + Fore.RESET)
             print(Fore.MAGENTA+"\n\ncodename ChangePropagationAgent:"+Fore.RESET+f"\n{changes}")
 
-            save_as_json(AI, 'tmp_agent.json')
+            #save_as_json(AI, 'tmp_agent.json')
         else:
             if consts.USER_IN_THE_LOOP:
                 AI.task_list = deque(AI.task_list)

@@ -8,7 +8,7 @@ import consts
 import traceback
 import json
 import sys
-
+from ast import literal_eval
 
 
 openai.api_key = consts.OPENAI_API_KEY
@@ -75,15 +75,58 @@ class AutonomousAgent:
                     self.get_current_state,
                     current_task,
                     [one_shot for one_shot in all_one_shots if one_shot["memory_id"] in one_shot_example_names] if one_shot_example_names is not None else '',
-                    self.task_list,
+                    self.task_list, 
+                    None
 
                 )
-            # print(Fore.LIGHTCYAN_EX + prompt + Fore.RESET)
+            #print(Fore.LIGHTCYAN_EX + prompt + Fore.RESET)
             changes = openai_call(
                 prompt,
                 .5,
                 4000-self.count_tokens(prompt),
             )
+
+
+            validate = (literal_eval(changes))["answer"]
+            prompt_validate = prompts.validate_agent(current_task, validate)
+            reformulated = openai_call(
+                prompt_validate,
+                .5,
+                4000-self.count_tokens(prompt),
+            )
+
+            data_reformulated = literal_eval(reformulated)
+
+            print(Fore.LIGHTCYAN_EX + reformulated + Fore.RESET)
+            while data_reformulated["status"] != "success":
+                prompt = prompts.execution_agent(
+                    self.objective,
+                    self.completed_tasks,
+                    self.get_current_state,
+                    current_task,
+                    [one_shot for one_shot in all_one_shots if one_shot["memory_id"] in one_shot_example_names] if one_shot_example_names is not None else '',
+                    self.task_list, 
+                    data_reformulated["report"]
+
+                )
+                changes = openai_call(
+                    prompt,
+                    .5,
+                    4000-self.count_tokens(prompt),
+                )
+                validate = (literal_eval(changes))["answer"]
+                prompt_validate = prompts.validate_agent(current_task, validate)
+                reformulated = openai_call(
+                    prompt_validate,
+                    .5,
+                    4000-self.count_tokens(prompt),
+                )
+                data_reformulated = literal_eval(reformulated)
+                
+                print(Fore.LIGHTCYAN_EX + reformulated + Fore.RESET)
+            
+            
+
 
             print(Fore.LIGHTMAGENTA_EX+f"\n\ncodename ExecutionAgent:"+Fore.RESET+f"\n\n{changes}")
 
@@ -98,6 +141,7 @@ class AutonomousAgent:
                         if inp[0] == 'n':
                             save_task = False
                         break
+            
 
             if save_task:
                 one_shots.append(

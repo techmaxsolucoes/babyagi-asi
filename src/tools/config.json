@@ -40,7 +40,7 @@
     "enabled": false
   },
   "erpnext_get_field_value": {
-    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> dict - Returns the field of a doctype(example: phone, email, ...), the document is indicated by filters, example {'filters':{'name':'namedocument'}}",    
+    "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> dict - extracts a field of a doctype(example: phone, email, ...), the document is indicated by filters, example {'filters':{'name':'namedocument'}}",    
     "enabled": true
   },
   "erpnext_get_field_single_value": {
@@ -48,7 +48,7 @@
     "enabled": false
   },
   "erpnext_set_field_value": {
-    "prompt": "- self.erpnext_set_field_value(doctype:str, ?docname:str, ?fieldname:str, ?value) -> dict - Set a field value of a specific doctype",
+    "prompt": "- self.erpnext_set_field_value(doctype:str, ?docname:str, ?fieldname:str, ?value) -> dict - Set a field value of a specific doctype, this is a better option than 'erpnext_update_doc' if the goal is to change only one field",
     "enabled": true
   },
   "erpnext_insert_many_docs": {
@@ -56,7 +56,7 @@
     "enabled": true
   },
   "erpnext_update_doc": {
-    "prompt": "- self.erpnext_update_doc(doc:dict) -> dict - Update (save) an existing document",
+    "prompt": "- self.erpnext_update_doc(doc:dict) -> dict - Update (save) an existing document, example - {'doc' {'doctype':'namedoctype', ..}",
     "enabled": true
   },
   "erpnext_cancel_doc": {
