@@ -35,7 +35,7 @@ def openai_call(prompt, temperature=0.8, max_tokens=0, role="assistant"):
 
 
 def count_tokens(text):
-    return len(encoding.encode(text))
+    return len(encoding.encode(str(text)))
 
 
 def split_answer_and_cot(text):

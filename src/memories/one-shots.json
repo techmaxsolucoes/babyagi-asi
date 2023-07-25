@@ -1,1 +1,48 @@
-[]
+[
+ {
+  "memory_id": "os-000000001",
+  "objective": "Preciso saber o nome dos clientes que tem a linguagem pt-BR",
+  "task": "Retrieve all Lead records with language set as \"pt-BR\" and extract their \"lead_name\" field",
+  "thoughts": [
+   "To retrieve all Lead records with language set as \"pt-BR\" and extract their \"lead_name\" field, I can use the 'erpnext_get_records_list' tool.",
+   "I need to pass the 'Lead' doctype and a filter for the 'language' field with the value 'pt-BR'.",
+   "I also need to specify that I want to retrieve only the 'lead_name' field."
+  ],
+  "code": {
+   "command": "erpnext_get_records_list",
+   "args": {
+    "doctype": "Lead",
+    "fields": [
+     "lead_name"
+    ],
+    "filters": {
+     "language": "pt-BR"
+    }
+   }
+  },
+  "keywords": "retrieve, Lead records, language, pt-BR, extract, lead_name"
+ },
+ {
+  "memory_id": "os-000000002",
+  "objective": "Preciso saber o nome dos clientes que tem a linguagem pt-BR",
+  "task": "Retrieve all Lead records with 'language' field set as 'pt-BR' and extract their 'lead_name' field",
+  "thoughts": [
+   "To retrieve all Lead records with the 'language' field set as 'pt-BR' and extract their 'lead_name' field, you can use the 'erpnext_get_records_list' tool.",
+   "You need to pass the 'Lead' doctype and a filter for the 'language' field with the value 'pt-BR'.",
+   "You also need to specify that you want to retrieve only the 'lead_name' field."
+  ],
+  "code": {
+   "command": "erpnext_get_records_list",
+   "args": {
+    "doctype": "Lead",
+    "fields": [
+     "lead_name"
+    ],
+    "filters": {
+     "language": "pt-BR"
+    }
+   }
+  },
+  "keywords": "retrieve, Lead records, language field, pt-BR, extract, lead_name field"
+ }
+]

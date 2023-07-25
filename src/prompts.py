@@ -104,7 +104,12 @@ Use only the fields that are necessary
 
 - ToDo -> a ToDo is a simple tool where you can define the activities to be done. The ToDo List will enlist all the activities assigned to you and by you, these are its fields:
 Use only the fields that are necessary
+
 {ToDo}
+
+ToDo details: If creating a ToDo that has a reference to a user, 
+the 'reference_type' field must be 'Lead', and the 'reference_name' field refers to the Lead ID, 
+so it is necessary to retrieve the lead ID to create a ToDo
 
 - Opportunity -> When you get a hint that lead is looking for a product/service that you offer, you can convert that lead into an opportunity. You can also create an opportunity against an existing customer. Multiple Opportunities can be collected against a lead or a customer, these are their fields:
 Use only the fields that are necessary
@@ -229,15 +234,24 @@ I must check if the command that ExecutionAgent has formulated, will be able to 
 The task is: {current_task}
 And this is the command the ExecutionAgent intends to run to fulfill it: {changes}
 
+First I must check if the command is using one of the allowed doctypes:
+
+- Lead , fields: {Lead}
+- Opportunity, fields: {Opportunity}
+- ToDo, fields: {ToDo}
+ToDo details: If creating a ToDo that has a reference to a user, 
+the 'reference_type' field must be 'Lead', and the 'reference_name' field refers to the Lead ID, 
+so it is necessary to retrieve the lead ID to create a ToDo
+
+Otherwise I must modify the command according to one of the doctypes mentioned above
+
 I should consider that the ExecutionAgent can use the following tools:
 
 {tools_erp}
 
 I should consider that he can only use these doctypes with the following fields:
 
-- Lead , fields: {Lead}
-- Opportunity, fields: {Opportunity}
-- ToDo, fields: {ToDo}
+
 
 My duty is to check the following requirements:
 - Is the command able to accurately fulfill the task objective?
@@ -262,7 +276,7 @@ this should be my response format:
 
 {{
     "status":"new_command",
-    "report":"<My suggestion of the command that should be execute(only commando, no args)>"
+    "report":"<My suggestion of the command that should be execute(using only the doctypes: ToDo, Opportunity, Lead)>"
 }}
 
 
@@ -272,10 +286,7 @@ Consider that the task must be accomplished only with this command
 
 NOTES:
 
-- My response should only be in JSON
-
-
-
+- My response should only be in JSON, I must add absolutely no comments or additional content, just JSON
 
 """
 
@@ -284,7 +295,7 @@ def verify_tasks_agent(tasks, objective):
 
 {chore_prompt}
 
-I'm VerifyTasksAgent, and I just received a list of tasks intended to fulfill a certain objective. However, the current list of tasks might not be sufficient to achieve the objective.
+I am VerifyTasksAgent, and I just received a list of tasks intended to fulfill a certain objective. However, the current list of tasks might not be sufficient to achieve the objective.
 
 The given tasks are as follows:
 
@@ -294,42 +305,60 @@ And the objective is:
 
 {objective}
 
-Your task is to check if the defined tasks are sufficient to fulfill the objective. If the tasks are enough to achieve the objective, please return them without any modifications, ensuring that the response contains only the list of tasks.
+My task is to check if the defined tasks are sufficient to fulfill the objective. If the tasks are enough to achieve the objective, I will return them without any modifications, ensuring that the response contains only the list of tasks.
 
-However, if the tasks are not enough to fulfill the objective or they contain conditional instructions, you need to reformat the tasks and provide a simplified, detailed step-by-step plan in task format to achieve the objective, considering the tools and accessible documents listed below.
+However, if the tasks are not enough to fulfill the objective or if it is an empty list, I will reformat (or create) the tasks and provide a simplified and detailed step-by-step plan in task format to achieve the objective, considering the tools and accessible documents listed below.
 
 #? TOOLS
-You must consider that the tools available to carry out the tasks are as follows:
+I must consider that the tools available to carry out the tasks are as follows:
 
 {tools_erp}
 
+Use ERPnext features efficiently to accomplish multiple objectives with fewer tasks.
+
+Carefully analyze each tool and its filters, as they can help reduce the amount of tasks, 
+condensing several tasks into one, and the fewer tasks the better
+
 And the accessible documents are:
-- Lead, fields: {Lead}
-- Opportunity, fields: {Opportunity}
-- ToDo, fields: {ToDo}
+
+    Lead, fields: {Lead}
+
+    Opportunity, fields: {Opportunity}
+
+    ToDo, fields: {ToDo}
+    ToDo details: If I'm creating a ToDo that has a reference to a user,
+    the 'reference_type' field must be 'Lead', and the 'reference_name' field refers to the Lead ID,
+    so I need to retrieve the lead ID to create a ToDo.
 
 #? ANSWER FORMAT(only list [])
-Your response should only be a list of tasks in the following format:
+My response should only be a list of tasks in the following format:
 
 '
-
-["I need to...", "I should...", "I have to...", ...]
-
+["task", "task", ...]
 '
+My tasks need to be written verbally, and can't just be commands
 
 
-Please remember:
-- Avoid using conditional statements in tasks; provide a simple, sequential step-by-step plan.
-- Do not return an empty list under any circumstances.
-- Start with data recovery tasks if needed for subsequent steps.
-- You don't need to include the save changes part in tasks.
-- Do not simply transcribe the objective, you must create detailed step-by-step tasks, only transcribe if the task is simple.
-- Try to provide a valid and simplified step-by-step plan to reach the goal.
-- Do not include any additional text, explanations, or formatting elements in the response.
-- You can only use ERPnext tools.
-- You can only create tasks based on ToDo, Lead, and Opportunity documents.
-- W- You don't need to include the "return" step
+#? OPTIMIZATION OF TASKS 
+To achieve the ultimate level of task combining:
+- Condense ALL filtering, extracting, retrieving, and returning tasks into ONE SINGLE TASK(["a single task with filtering, extracting, retrieving, and returning"]).
+- Include every action necessary in a single task to accomplish the objective.
+An example of several tasks compressed into one:
+["Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"]
+This is the format I should follow in request tasks
 
-Now, please proceed with the task verification and reformatting if necessary, ensuring that the response contains only the requested list of tasks, without any additional content.
+#? DATA REQUEST
 
+If a command requires data retrieval or input from specific documents, ensure that you include necessary data recovery tasks as the first steps. 
+These data retrieval tasks should precede any actions that depend on the retrieved information.
+I can request data from a Lead, a ToDo or an Opportunity
+Try to reduce data requests in a task, using filters and field requests, if possible
+
+
+Now I must provide the necessary tasks to fulfill the objective: {objective}
+
+NOTES: 
+
+- My answer must be an array
+- I must not use space breaks
 """

@@ -24,7 +24,7 @@
     "enabled": false
   },
   "erpnext_get_records_list": {
-    "prompt": "- self.erpnext_get_records_list(doctype:str, ?fields:list, ?filters:list, ?order_by:str, ?limit_start:int, ?limit_page_length:int, ?parent:str, ?or_filters:list) -> list[dict] - Returns a list of records by filters, fields, ordering and limit",
+    "prompt": "- self.erpnext_get_records_list(doctype:str, ?fields:dict, ?filters:dict, ?order_by:str, ?limit_start:int, ?limit_page_length:int, ?parent:str, ?or_filters:list) -> list[dict] - Returns a list of records by filters(dict), being able to request one or more specific fields by the key 'fields'",
     "enabled": true
   },
   "erpnext_insert_doc": {
