@@ -44,5 +44,43 @@
    }
   },
   "keywords": "retrieve, Lead records, language field, pt-BR, extract, lead_name field"
+ },
+ {
+  "memory_id": "os-000000003",
+  "objective": "Eu preciso marcar uma reunião para o Emanuel Araújo Santana amanhã",
+  "task": "Retrieve the Lead record for Emanuel Araújo Santana",
+  "thoughts": [
+   "To retrieve the Lead record for Emanuel Araújo Santana, you can use the 'erpnext_get_record' tool.",
+   "You need to pass the 'Lead' doctype and a filter for the 'lead_name' field with the value 'Emanuel Araújo Santana'."
+  ],
+  "code": {
+   "command": "erpnext_get_record",
+   "args": {
+    "doctype": "Lead",
+    "filters": {
+     "lead_name": "Emanuel Araújo Santana"
+    }
+   }
+  },
+  "keywords": "retrieve, Lead record, Emanuel Araújo Santana, erpnext_get_record, Lead, lead_name"
+ },
+ {
+  "memory_id": "os-000000004",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "task": "Retrieve all ToDo records with 'priority' field set as 'Medium'",
+  "thoughts": [
+   "I need to retrieve all ToDo records with 'priority' field set as 'Medium'.",
+   "I should use the 'erpnext_get_records_list' tool to fetch the records."
+  ],
+  "code": {
+   "command": "erpnext_get_records_list",
+   "args": {
+    "doctype": "ToDo",
+    "filters": {
+     "priority": "Medium"
+    }
+   }
+  },
+  "keywords": "retrieve, ToDo records, priority, Medium, erpnext_get_records_list, filters"
  }
 ]
