@@ -47,26 +47,26 @@
  },
  {
   "memory_id": "os-000000003",
-  "objective": "Eu preciso marcar uma reunião para o Emanuel Araújo Santana amanhã",
-  "task": "Retrieve the Lead record for Emanuel Araújo Santana",
+  "objective": "Eu preciso marcar uma reuniï¿½o para o Emanuel Araï¿½jo Santana amanhï¿½",
+  "task": "Retrieve the Lead record for Emanuel Araï¿½jo Santana",
   "thoughts": [
-   "To retrieve the Lead record for Emanuel Araújo Santana, you can use the 'erpnext_get_record' tool.",
-   "You need to pass the 'Lead' doctype and a filter for the 'lead_name' field with the value 'Emanuel Araújo Santana'."
+   "To retrieve the Lead record for Emanuel Araï¿½jo Santana, you can use the 'erpnext_get_record' tool.",
+   "You need to pass the 'Lead' doctype and a filter for the 'lead_name' field with the value 'Emanuel Araï¿½jo Santana'."
   ],
   "code": {
    "command": "erpnext_get_record",
    "args": {
     "doctype": "Lead",
     "filters": {
-     "lead_name": "Emanuel Araújo Santana"
+     "lead_name": "Emanuel Araï¿½jo Santana"
     }
    }
   },
-  "keywords": "retrieve, Lead record, Emanuel Araújo Santana, erpnext_get_record, Lead, lead_name"
+  "keywords": "retrieve, Lead record, Emanuel Araï¿½jo Santana, erpnext_get_record, Lead, lead_name"
  },
  {
   "memory_id": "os-000000004",
-  "objective": "Me retorne todos os afazeres com prioridade média",
+  "objective": "Me retorne todos os afazeres com prioridade mï¿½dia",
   "task": "Retrieve all ToDo records with 'priority' field set as 'Medium'",
   "thoughts": [
    "I need to retrieve all ToDo records with 'priority' field set as 'Medium'.",

@@ -14,12 +14,14 @@ GLOBAL_HL = os.getenv("GLOBAL_HL", "")
 GLOBAL_GL = os.getenv("GLOBAL_GL", "")
 GLOBAL_LOCATION = os.getenv("GLOBAL_LOCATION", "")
 
+
 OBJECTIVE = os.getenv("OBJECTIVE", "")
 TASKS_LIST = eval(os.getenv("TASKS_LIST", ""))
 
 PINECONE_DB = False
 SERP_API = False
 DEBUG = True
+VIEWER = False
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "")
 if PINECONE_API_KEY != "":

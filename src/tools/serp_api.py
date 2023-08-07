@@ -32,10 +32,11 @@ def get_serp_query_result(query: str, n: int = 1, engine: str = 'GoogleSearch') 
 
 ERPCLIENT = None
 
-@fuckit
+#@fuckit
 def get_erp_api_result(method, *args, **kwargs):
-    print(kwargs)
-    print(method)
+    if consts.VIEWER:
+        print(kwargs)
+        print(method)
     global ERPCLIENT
     if not ERPCLIENT:
         from frappeclient import FrappeClient

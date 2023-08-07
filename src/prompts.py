@@ -329,14 +329,19 @@ And the accessible documents are:
     ToDo details: If I'm creating a ToDo that has a reference to a user,
     the 'reference_type' field must be 'Lead', and the 'reference_name' field refers to the Lead ID,
     so I need to retrieve the lead ID to create a ToDo.
+    Example : ["Get Lead ID for Joaozin", "Create a Task with the following details: - Status: Open - Priority: Medium - Date: 09/15/2025 - Allocated to: chatbot@techmaxsolucoes.com.br - Description: Meeting, - Reference Type: Lead, - Reference Name: Lead ID"]
+    I shouldn't use line breaks, just like in the example
 
 #? ANSWER FORMAT(only list [])
 My response should only be a list of tasks in the following format:
 
 '
 ["task", "task", ...]
+
 '
+
 My tasks need to be written verbally, and can't just be commands
+
 
 
 #? OPTIMIZATION OF TASKS 
@@ -357,8 +362,10 @@ Try to reduce data requests in a task, using filters and field requests, if poss
 
 Now I must provide the necessary tasks to fulfill the objective: {objective}
 
-NOTES: 
 
-- My answer must be an array
-- I must not use space breaks
+#? NOTES 
+
+- My answer must be an array(Valid)
+
+
 """

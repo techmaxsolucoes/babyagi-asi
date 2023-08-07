@@ -21,7 +21,7 @@ def openai_call(prompt, temperature=0.8, max_tokens=0, role="assistant"):
         },
         {"role": role, "content": prompt},
     ]
-    # print(prompt)
+    #print(prompt)
     output_lenght = 4000-count_tokens(str(messages)) if not consts.USE_GPT4 else 8000 - count_tokens(messages) if max_tokens == 0 else max_tokens
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo" if not consts.USE_GPT4 else "gpt-4",
@@ -39,15 +39,17 @@ def count_tokens(text):
 
 
 def split_answer_and_cot(text):
-    print("*************************")
-    print(text)
-    print("*************************")
+    if consts.VIEWER:
+        print("*************************")
+        print(text)
+        print("*************************")
     cot = ast.literal_eval(text)["chain of thoughts"]
     code = ast.literal_eval(text)["answer"] 
 
-    print("=-=-=-=-=-=-=-=-=-=")
-    print(code)
-    print("=-=-=-=-=-=-=-=-=-=")
+    if consts.VIEWER:
+        print("=-=-=-=-=-=-=-=-=-=")
+        print(code)
+        print("=-=-=-=-=-=-=-=-=-=")
     return [code, cot]
 
 
