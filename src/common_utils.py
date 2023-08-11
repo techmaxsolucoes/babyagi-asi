@@ -62,7 +62,12 @@ def get_oneshots():
         p_one_shots += json.loads(f.read())
 
     return one_shots, p_one_shots
-
+def get_taskscreated():
+    tasks_created = []
+    with open('src/memories/tasks-created.json', 'r') as f:
+        tasks_created = json.loads(f.read())
+    return tasks_created
+  
 def recover_fields(namedoc):
     response = serp_api.get_erp_api_result('get_doc', doctype="DocType", name=namedoc)
     fields = []

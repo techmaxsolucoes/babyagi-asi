@@ -88,16 +88,15 @@ class AutonomousAgent:
 
 
             validate = (literal_eval(changes))["answer"]
-            prompt_validate = prompts.validate_agent(current_task, validate)
+            prompt_validate = prompts.validate_agent(None ,current_task, validate)
             reformulated = openai_call(
                 prompt_validate,
                 .5,
                 4000-self.count_tokens(prompt),
             )
-
             data_reformulated = literal_eval(reformulated)
-
-            print(Fore.LIGHTCYAN_EX + reformulated + Fore.RESET)
+            if consts.VIEWER:
+             print(Fore.LIGHTCYAN_EX + reformulated + Fore.RESET)
             while data_reformulated["status"] != "success":
                 prompt = prompts.execution_agent(
                     self.objective,
@@ -115,15 +114,17 @@ class AutonomousAgent:
                     4000-self.count_tokens(prompt),
                 )
                 validate = (literal_eval(changes))["answer"]
-                prompt_validate = prompts.validate_agent(current_task, validate)
+                prompt_validate = prompts.validate_agent(data_reformulated ,current_task, validate)
                 reformulated = openai_call(
                     prompt_validate,
                     .5,
                     4000-self.count_tokens(prompt),
                 )
+                if reformulated == str(data_reformulated):
+                    break
                 data_reformulated = literal_eval(reformulated)
-                
-                print(Fore.LIGHTCYAN_EX + reformulated + Fore.RESET)
+                if consts.VIEWER:
+                 print(Fore.LIGHTCYAN_EX + reformulated + Fore.RESET)
             
             
 

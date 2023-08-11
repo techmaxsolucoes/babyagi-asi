@@ -158,10 +158,14 @@ This must be the format of my response:
 }}
 '
 
+#? NOTES:
+
+- My response should only be in JSON, I must add absolutely no comments or additional content, just JSON
+
 If "return" is equal to "None", or empty, it means that the execution failed
 I should only return the JSON, and all comments should be placed in the "message" key
 I must not return dummy data
-I can't create new tasks. I must just explain the changes to execution_agent:
+I can't create new tasks. I must just explain the changes to execution_agent
 """
 
 
@@ -224,7 +228,7 @@ Example:
 "Thought: I need to install and import PyAutoGUI. Answer: import os; os.system('pip install pyautogui'); import pyautogui; return 'Installed and imported PyAutoGUI'"
 """
 
-def validate_agent(current_task, changes):
+def validate_agent(data_reformulated, current_task, changes):
  return f"""
 
 {chore_prompt}
@@ -284,14 +288,26 @@ this should be my response format:
 ATTENTION: I must pay attention to the smallest details of this task's request ({current_task}), and if the ExecutionAgent command ({changes}), manages to supply 100% of the task's request
 Consider that the task must be accomplished only with this command
 
-NOTES:
+#? LAST REWORK:
+
+I'm running the tasks in a loop, so maybe I could be receiving a task that I've already reformulated, to avoid an infinite loop,
+I should analyze whether the command I'm going to execute is similar to the previous one, if so, I just have to return "success",
+and the displayed command
+!If the value shown below is null, just skip this step!
+Last rework:
+
+{data_reformulated}
+
+
+#? NOTES:
 
 - My response should only be in JSON, I must add absolutely no comments or additional content, just JSON
 
 """
 
-def verify_tasks_agent(tasks, objective):
+def verify_tasks_agent(historic, tasks, objective):
     return f"""
+
 
 {chore_prompt}
 
@@ -329,6 +345,8 @@ And the accessible documents are:
     ToDo details: If I'm creating a ToDo that has a reference to a user,
     the 'reference_type' field must be 'Lead', and the 'reference_name' field refers to the Lead ID,
     so I need to retrieve the lead ID to create a ToDo.
+    The "owner" is "chatbot@techmaxsolucoes.com.br".
+    The allocated_to is "chatbot@techmaxsolucoes.com.br".
     Example : ["Get Lead ID for Joaozin", "Create a Task with the following details: - Status: Open - Priority: Medium - Date: 09/15/2025 - Allocated to: chatbot@techmaxsolucoes.com.br - Description: Meeting, - Reference Type: Lead, - Reference Name: Lead ID"]
     I shouldn't use line breaks, just like in the example
 
@@ -363,14 +381,15 @@ Try to reduce data requests in a task, using filters and field requests, if poss
 Now I must provide the necessary tasks to fulfill the objective: {objective}
 
 
-<<<<<<< HEAD
+
 #? NOTES 
 
-- My answer must be an array(Valid)
-
-
-=======
 - My response must be a VALID array
 - I must by no means use line breaks as this will invalidate the array
->>>>>>> 5201385 (fix_errors)
+
+#? HISTORIC
+
+This is my history of creating tasks for their respective objectives
+
+
 """

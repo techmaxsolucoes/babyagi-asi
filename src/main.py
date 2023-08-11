@@ -8,6 +8,7 @@ from tools import serp_api
 from prompts import verify_tasks_agent
 from babyagi import openai_call, count_tokens
 from ast import literal_eval
+from common_utils import get_taskscreated
 
 
 def save_as_json(agent: AutonomousAgent, filepath):
@@ -46,17 +47,24 @@ if __name__ == "__main__":
 
         AI = AutonomousAgent(objective)
 
-        # add tasks manually if .env tasks_list is empty
-        prompt = verify_tasks_agent(consts.TASKS_LIST, consts.OBJECTIVE)
+        
+        historic = get_taskscreated()
+        prompt = verify_tasks_agent(historic, consts.TASKS_LIST, consts.OBJECTIVE)
         new_tasks = openai_call(
                 prompt,
                 .5,
                 4000-count_tokens(prompt),
         )
-
-        print(new_tasks)
+        new_tasks = str(new_tasks).replace('\n', ' ').replace('\r', '')
+        if consts.VIEWER:
+         print(new_tasks)
         consts.TASKS_LIST = literal_eval(new_tasks)
-        print(consts.TASKS_LIST)
+        last_id = "tc-{0:09d}".format(len(historic)+1)
+        tasks_created = [{"tasks_id":last_id,"objective": consts.OBJECTIVE, "tasks_for_objective": consts.TASKS_LIST}]
+        with open("src/memories/tasks-created.json", 'w') as f:
+            f.write(json.dumps(tasks_created, indent=True, ensure_ascii=False))
+
+        # add tasks manually if .env tasks_list is empty
         if len(consts.TASKS_LIST) == 0:
             ct = 1
             while True:
