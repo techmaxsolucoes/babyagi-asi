@@ -88,11 +88,13 @@ I must implement everything necessary for my current task.
 '- fictional and simplified example.
 
 #? ANSWER
-Format: 
+Format: A valid JSON
+
 {{
 "chain of thoughts": [step-by-step reasoning], 
 "answer": valid JSON only(COMMAND FORMAT)
 }}.
+
 - Both keys are mandatory("chain of thoughts" and "answer")
 
 #? DOCTYPES
@@ -128,8 +130,6 @@ Don't use "null" but use "None";
 This here is a tip for the execution of your command:
 
 {reformulated}
-
-
 
 """
 
@@ -212,10 +212,10 @@ BabyAGI (repl_agent) - current task: {current_task}
 Code:
 {code}
 ```
-I faced this error: {e.__name__} {str(e)};
+I faced this error: {e.__class__.__name__} {str(e)};
 Now I must re-write the 'action' function, but fixed;
 In the previous code, which triggered the error, I was trying to: {cot};
-Error: {e.__name__} {str(e)};
+Error: {e.__class__.__name__} {str(e)};
 Fix: Rewrite the 'action' function.
 Previous action: {cot};
 
@@ -241,7 +241,7 @@ First I must check if the command is using one of the allowed doctypes:
 - ToDo, fields: {ToDo}
 ToDo details: If creating a ToDo that has a reference to a user, 
 the 'reference_type' field must be 'Lead', and the 'reference_name' field refers to the Lead ID, 
-so it is necessary to retrieve the lead ID to create a ToDo
+so it is necessary to retrieve the lead ID to create a ToDo, and the "owner" is "chatbot@techmaxsolucoes.com.br";
 
 Otherwise I must modify the command according to one of the doctypes mentioned above
 
@@ -363,9 +363,14 @@ Try to reduce data requests in a task, using filters and field requests, if poss
 Now I must provide the necessary tasks to fulfill the objective: {objective}
 
 
+<<<<<<< HEAD
 #? NOTES 
 
 - My answer must be an array(Valid)
 
 
+=======
+- My response must be a VALID array
+- I must by no means use line breaks as this will invalidate the array
+>>>>>>> 5201385 (fix_errors)
 """

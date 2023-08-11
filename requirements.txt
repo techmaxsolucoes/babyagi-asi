@@ -8,4 +8,4 @@ tiktoken==0.3.3
 bs4
 frappe-client
 fuckit
-ast
+

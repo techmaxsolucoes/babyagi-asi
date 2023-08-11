@@ -201,7 +201,7 @@ class AutonomousAgent:
                         pdb.set_trace()
                     if input('WANNA CONTINUE? y/N: ') not in ('YysS'):
                         sys.exit(1)
-                print(Fore.RED + f"\n\nFIXING AN ERROR: {e.__name__} {e}\n" + Fore.RESET)
+                print(Fore.RED + f"\n\nFIXING AN ERROR: {e.__class__.__name__} {e}\n" + Fore.RESET)
                 print(f"{ct} try")
 
                 prompt = prompts.fix_agent(current_task, code, cot, e)
@@ -290,20 +290,24 @@ class AutonomousAgent:
             limit_page_length=limit_page_length
         )
     
-    """
+    
     def erpnext_get_records_count(self, doctype, filters=None):
-        ""Returns the number of records that matches a filter
+        """Returns the number of records that matches a filter
         
         :param doctype: DocType of the data to be queried.
         :param filters: filter list by this dict
-        ""
+        """
 
-        return self.get_erp_api_result(
-            'get_count',
-            doctype=doctype,
-            filters=filters
-        )
-    """
+        return len(self.erpnext_get_records_list(doctype, ['name'], filters))
+    
+    def erpnext_get_record_exists(self, doctype, filters=None):
+        """Return the boolean that indicates if a record exists or not
+        
+        :param doctype: DocType of the data to be queried.
+        :para filters: filter list by this dict
+        """
+
+        return bool(self.erpnext_get_records_list(doctype, ['name'], filters))
     
     def erpnext_get_record(self, doctype, name='', filters=None, parent=None):
         """Returns a document by name or filters

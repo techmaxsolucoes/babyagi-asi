@@ -37,7 +37,11 @@
   },
   "erpnext_get_records_count": {
     "prompt": "- self.erpnext_get_records_count(doctype:str, ?filters:dict) -> int - Returns the number of docs that matches a filter",
-    "enabled": false
+    "enabled": true
+  },
+  "erpnext_get_record_exists": {
+    "prompt": "- self.erpnext_get_record_exists(doctype:str, ?filters:dict) -> int - Returns a bool if a records exists",
+    "enabled": true
   },
   "erpnext_get_field_value": {
     "prompt": "- self.erpnext_get_field_value(doctype:str, ?fieldname:list, ?filters:dict) -> dict - extracts a field of a doctype(example: phone, email, ...), the document is indicated by filters, example {'filters':{'name':'namedocument'}}",    

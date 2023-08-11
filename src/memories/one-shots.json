@@ -47,17 +47,26 @@
  },
  {
   "memory_id": "os-000000003",
+<<<<<<< HEAD
   "objective": "Eu preciso marcar uma reuni�o para o Emanuel Ara�jo Santana amanh�",
   "task": "Retrieve the Lead record for Emanuel Ara�jo Santana",
   "thoughts": [
    "To retrieve the Lead record for Emanuel Ara�jo Santana, you can use the 'erpnext_get_record' tool.",
    "You need to pass the 'Lead' doctype and a filter for the 'lead_name' field with the value 'Emanuel Ara�jo Santana'."
+=======
+  "objective": "Marcar uma reunião para o Emanuel Araújo Santana as 18 da sexta que vem",
+  "task": "Retrieve the lead with the name \"Emanuel Araújo Santana\"",
+  "thoughts": [
+   "To retrieve the lead with the name 'Emanuel Araújo Santana', I can use the 'erpnext_get_record' tool.",
+   "I need to pass the 'Lead' doctype and a filter for the 'lead_name' field with the value 'Emanuel Araújo Santana'."
+>>>>>>> 5201385 (fix_errors)
   ],
   "code": {
    "command": "erpnext_get_record",
    "args": {
     "doctype": "Lead",
     "filters": {
+<<<<<<< HEAD
      "lead_name": "Emanuel Ara�jo Santana"
     }
    }
@@ -82,5 +91,101 @@
    }
   },
   "keywords": "retrieve, ToDo records, priority, Medium, erpnext_get_records_list, filters"
+=======
+     "lead_name": "Emanuel Araújo Santana"
+    }
+   }
+  },
+  "keywords": "retrieve, lead, name, Emanuel Araújo Santana, erpnext_get_record, Lead, filters"
+ },
+ {
+  "memory_id": "os-000000004",
+  "objective": "Marcar uma reunião para o Emanuel Araújo Santana as 18 da sexta que vem",
+  "task": "Create a ToDo with the following details: {\"status\": \"Open\", \"priority\": \"High\", \"date\": \"next Friday 18:00\", \"allocated_to\": \"Emanuel Araújo Santana\", \"description\": \"Reunião\"}",
+  "thoughts": [
+   "To create a ToDo with the given details, you can use the 'erpnext_insert_doc' tool.",
+   "You need to pass the 'ToDo' doctype and a dictionary containing the details of the ToDo.",
+   "The dictionary should include the following fields: 'status', 'priority', 'date', 'allocated_to', and 'description'.",
+   "Set the 'status' field to 'Open', the 'priority' field to 'High', the 'date' field to 'next Friday 18:00', the 'allocated_to' field to 'Emanuel Araújo Santana', and the 'description' field to 'Reunião'."
+  ],
+  "code": {
+   "command": "erpnext_insert_doc",
+   "args": {
+    "doc": {
+     "doctype": "ToDo",
+     "status": "Open",
+     "priority": "High",
+     "date": "next Friday 18:00",
+     "allocated_to": "Emanuel Araújo Santana",
+     "description": "Reunião"
+    }
+   }
+  },
+  "keywords": "Create, ToDo, details, status, Open, priority, High, date, next Friday 18:00, allocated_to, Emanuel Araújo Santana, description, Reunião, erpnext_insert_doc, args, doc, doctype"
+ },
+ {
+  "memory_id": "os-000000005",
+  "objective": "Marcar uma reunião para o Emanuel Araújo Santana as 18 da sexta que vem",
+  "task": "Retrieve the Lead record with the name 'Emanuel Araújo Santana'",
+  "thoughts": [
+   "To retrieve the Lead record with the name 'Emanuel Araújo Santana', I can use the 'erpnext_get_record' tool.",
+   "I need to pass the 'Lead' doctype and a filter for the 'lead_name' field with the value 'Emanuel Araújo Santana'."
+  ],
+  "code": {
+   "command": "erpnext_get_record",
+   "args": {
+    "doctype": "Lead",
+    "filters": {
+     "lead_name": "Emanuel Araújo Santana"
+    }
+   }
+  },
+  "keywords": "retrieve, lead record, name, Emanuel Araújo Santana, erpnext_get_record, Lead, filters, lead_name"
+ },
+ {
+  "memory_id": "os-000000006",
+  "objective": "Marcar uma reunião para o Emanuel Araújo Santana as 18 da sexta que vem",
+  "task": "Extract the 'email_id' field from the Lead record",
+  "thoughts": [
+   "To extract the 'email_id' field from the Lead record, I can use the 'erpnext_get_field_value' tool.",
+   "I need to pass the 'Lead' doctype, the 'email_id' fieldname, and a filter for the 'lead_name' field with the value 'Emanuel Araújo Santana'."
+  ],
+  "code": {
+   "command": "erpnext_get_field_value",
+   "args": {
+    "doctype": "Lead",
+    "fieldname": "email_id",
+    "filters": {
+     "lead_name": "Emanuel Araújo Santana"
+    }
+   }
+  },
+  "keywords": "extract, email_id, field, Lead record, erpnext_get_field_value, Lead, email_id, filters, lead_name, Emanuel Araújo Santana"
+ },
+ {
+  "memory_id": "os-000000007",
+  "objective": "Marcar uma reunião para o Emanuel Araújo Santana as 18 da sexta que vem",
+  "task": "Create a ToDo with the following details: {'status': 'Open', 'priority': 'Medium', 'date': 'next Friday at 18:00', 'allocated_to': 'Emanuel Araújo Santana', 'description': 'Reunião'}",
+  "thoughts": [
+   "To create a ToDo with the given details, you can use the 'erpnext_insert_doc' tool.",
+   "You need to pass the 'ToDo' doctype and a dictionary containing the details of the ToDo.",
+   "The dictionary should include the following fields: 'status', 'priority', 'date', 'allocated_to', and 'description'.",
+   "Set the 'status' field to 'Open', the 'priority' field to 'Medium', the 'date' field to 'next Friday at 18:00', the 'allocated_to' field to 'Emanuel Araújo Santana', and the 'description' field to 'Reunião'."
+  ],
+  "code": {
+   "command": "erpnext_insert_doc",
+   "args": {
+    "doc": {
+     "doctype": "ToDo",
+     "status": "Open",
+     "priority": "Medium",
+     "date": "next Friday at 18:00",
+     "allocated_to": "Emanuel Araújo Santana",
+     "description": "Reunião"
+    }
+   }
+  },
+  "keywords": "Create, ToDo, details, status, Open, priority, Medium, date, next Friday at 18:00, allocated_to, Emanuel Araújo Santana, description, Reunião, command, erpnext_insert_doc, args, doc, doctype"
+>>>>>>> 5201385 (fix_errors)
  }
 ]

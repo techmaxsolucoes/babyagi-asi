@@ -2,12 +2,14 @@ import colorama
 from colorama import Fore
 from serpapi import GoogleSearch
 import fuckit
+import urllib3
 
 from consts import SERP_API_KEY, GLOBAL_HL, GLOBAL_GL, GLOBAL_LOCATION
 import consts
 
 colorama.init()
 
+urllib3.disable_warnings()
 
 def get_serp_query_result(query: str, n: int = 1, engine: str = 'GoogleSearch') -> list:
     search = []
