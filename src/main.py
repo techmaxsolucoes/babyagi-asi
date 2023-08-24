@@ -58,11 +58,14 @@ if __name__ == "__main__":
         new_tasks = str(new_tasks).replace('\n', ' ').replace('\r', '')
         if consts.VIEWER:
          print(new_tasks)
+
+        print(Fore.YELLOW+f"\n\ncodename TasksAgent:"+Fore.RESET)
         consts.TASKS_LIST = literal_eval(new_tasks)
         last_id = "tc-{0:09d}".format(len(historic)+1)
-        tasks_created = [{"tasks_id":last_id,"objective": consts.OBJECTIVE, "tasks_for_objective": consts.TASKS_LIST}]
+        tasks_created = {"tasks_id":last_id,"objective": consts.OBJECTIVE, "tasks_for_objective": consts.TASKS_LIST}
+        historic.append(tasks_created)
         with open("src/memories/tasks-created.json", 'w') as f:
-            f.write(json.dumps(tasks_created, indent=True, ensure_ascii=False))
+            f.write(json.dumps(historic, indent=True, ensure_ascii=False))
 
         # add tasks manually if .env tasks_list is empty
         if len(consts.TASKS_LIST) == 0:

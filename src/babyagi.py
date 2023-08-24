@@ -128,8 +128,11 @@ class AutonomousAgent:
             
             
 
+            thoughts = literal_eval(changes)["chain of thoughts"]
+            print(Fore.LIGHTMAGENTA_EX+f"\n\ncodename ExecutionAgent:"+Fore.RESET+f"\n\n{thoughts}")
 
-            print(Fore.LIGHTMAGENTA_EX+f"\n\ncodename ExecutionAgent:"+Fore.RESET+f"\n\n{changes}")
+            if consts.VIEWER:
+                print(f"Command: {changes}")
 
             # try until complete
             result, code, cot = self.repl_agent(current_task, changes)
@@ -164,7 +167,10 @@ class AutonomousAgent:
 
         else:
             cot, code = [[o['thoughts'], o['code']] for o in one_shots if o['task'] == current_task][0]
-            print(Fore.LIGHTMAGENTA_EX + f"\n\ncodename ExecutionAgent:" + Fore.RESET + f"\nChain of thoughts: {cot}\n\nAnswer:\n{code}")
+            print(Fore.LIGHTMAGENTA_EX + f"\n\ncodename ExecutionAgent:" + Fore.RESET + f"\nChain of thoughts:")
+            print(*cot, sep='\n')
+            print(f"\n\nAnswer:\n{code}")
+
             #action_func = exec(code, self.__dict__)
             #result = self.action(self)
             result = self.execute_action(code)    

@@ -340,6 +340,10 @@ And the accessible documents are:
     Lead, fields: {Lead}
 
     Opportunity, fields: {Opportunity}
+    Opportunity details: If I'm creating a Opportunity that has a reference to a user,
+    the 'opportunity_from' field must be 'Lead', and the 'party_name' field refers to the Lead ID,
+    so I need to retrieve the lead ID to create a Opportunity.
+    The "owner" is "chatbot@techmaxsolucoes.com.br".
 
     ToDo, fields: {ToDo}
     ToDo details: If I'm creating a ToDo that has a reference to a user,

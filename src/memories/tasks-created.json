@@ -1,0 +1,73 @@
+[
+ {
+  "tasks_id": "tc-000000001",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000002",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000003",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium'"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000004",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with priority set as \"Medium\""
+  ]
+ },
+ {
+  "tasks_id": "tc-000000005",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with priority set as Medium"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000006",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000007",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "- Retrieve all ToDo records with priority set as Medium"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000008",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium'",
+   "Return the list of ToDo records"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000009",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium'"
+  ]
+ },
+ {
+  "tasks_id": "tc-000000010",
+  "objective": "Me retorne todos os afazeres com prioridade média",
+  "tasks_for_objective": [
+   "Retrieve all ToDo records with 'priority' field set as 'Medium'"
+  ]
+ }
+]
