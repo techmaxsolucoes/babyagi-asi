@@ -1,73 +1,17 @@
 [
  {
   "tasks_id": "tc-000000001",
-  "objective": "Me retorne todos os afazeres com prioridade média",
+  "objective": "Me retorne a descrição de todos os afazeres com prioridade média",
   "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"
+   "Retrieve all ToDo records with priority set as Medium and extract their description field"
   ]
  },
  {
   "tasks_id": "tc-000000002",
-  "objective": "Me retorne todos os afazeres com prioridade média",
+  "objective": "Preciso que você crie uma reunião para o Emanuel Araújo Santana, e o valor da data precisa ser 'Indefinida'",
   "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"
-  ]
- },
- {
-  "tasks_id": "tc-000000003",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium'"
-  ]
- },
- {
-  "tasks_id": "tc-000000004",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with priority set as \"Medium\""
-  ]
- },
- {
-  "tasks_id": "tc-000000005",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with priority set as Medium"
-  ]
- },
- {
-  "tasks_id": "tc-000000006",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field"
-  ]
- },
- {
-  "tasks_id": "tc-000000007",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "- Retrieve all ToDo records with priority set as Medium"
-  ]
- },
- {
-  "tasks_id": "tc-000000008",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium'",
-   "Return the list of ToDo records"
-  ]
- },
- {
-  "tasks_id": "tc-000000009",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium'"
-  ]
- },
- {
-  "tasks_id": "tc-000000010",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "tasks_for_objective": [
-   "Retrieve all ToDo records with 'priority' field set as 'Medium'"
+   "Retrieve the Lead ID for Emanuel Araújo Santana",
+   "Create a ToDo with the following details:  - Status: Open  - Priority: Medium  - Date: Indefinida  - Allocated to: chatbot@techmaxsolucoes.com.br  - Description: Reunião  - Reference Type: Lead  - Reference Name: Lead ID"
   ]
  }
 ]

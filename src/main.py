@@ -113,7 +113,8 @@ if __name__ == "__main__":
             changes = AI.change_propagation_agent(result)
             response = ast.literal_eval(changes)
             print(Fore.YELLOW + "\n*TASK RESULT*\n" + Fore.RESET)
-            print(Fore.MAGENTA+"\n\ncodename ChangePropagationAgent:"+Fore.RESET+f"\n{changes}")
+            print(Fore.MAGENTA+"\n\ncodename ChangePropagationAgent:"+Fore.RESET+f"\n")
+            print(f"Return: {response['return']}\n\nStatus: {response['status']}\n\nMessage: {response['message']}")
 
             #save_as_json(AI, 'tmp_agent.json')
         else:

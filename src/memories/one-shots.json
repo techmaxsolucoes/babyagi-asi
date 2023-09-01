@@ -168,136 +168,25 @@
  },
  {
   "memory_id": "os-000000008",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "- self.erpnext_get_records_list(\"ToDo\", {\"priority\": \"Medium\"}) -> list[dict]",
+  "objective": "Me retorne a descrição de todos os afazeres com prioridade média",
+  "task": "Retrieve all ToDo records with priority set as Medium and extract their description field",
   "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
-   "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'."
-  ],
-  "code": {
-   "command": "erpnext_get_records_list",
-   "args": {
-    "doctype": "ToDo",
-    "filters": {
-     "priority": "Medium"
-    }
-   }
-  },
-  "keywords": "self, erpnext_get_records_list, ToDo, priority, Medium, list, dict, command, args, doctype, filters"
- },
- {
-  "memory_id": "os-000000009",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "Retorne todas as tarefas com prioridade média",
-  "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
-   "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'."
-  ],
-  "code": {
-   "command": "erpnext_get_records_list",
-   "args": {
-    "doctype": "ToDo",
-    "filters": {
-     "priority": "Medium"
-    }
-   }
-  },
-  "keywords": "Retorne, tarefas, prioridade média, erpnext_get_records_list, ToDo, priority, Medium"
- },
- {
-  "memory_id": "os-000000010",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "- self.erpnext_get_records_list(\"ToDo\", {\"filters\": {\"priority\": \"Medium\"}}) -> list[dict] - Returns a list of ToDo records with \"priority\" field set as \"Medium\"",
-  "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
+   "To retrieve all ToDo records with priority set as Medium and extract their description field, I can use the 'erpnext_get_records_list' tool.",
    "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'.",
-   "I don't need to specify any fields to retrieve, so I can leave the 'fields' argument empty."
+   "I also need to specify that I want to retrieve only the 'description' field."
   ],
   "code": {
    "command": "erpnext_get_records_list",
    "args": {
     "doctype": "ToDo",
+    "fields": [
+     "description"
+    ],
     "filters": {
      "priority": "Medium"
     }
    }
   },
-  "keywords": "erpnext_get_records_list, ToDo, priority, Medium, list, dict, returns"
- },
- {
-  "memory_id": "os-000000011",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "Retrieve all ToDo records with 'priority' field set as 'Medium' and extract their 'description' field",
-  "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
-   "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'."
-  ],
-  "code": {
-   "command": "erpnext_get_records_list",
-   "args": {
-    "doctype": "ToDo",
-    "filters": {
-     "priority": "Medium"
-    }
-   }
-  },
-  "keywords": "retrieve, ToDo, records, priority, Medium, extract, description, field"
- },
- {
-  "memory_id": "os-000000012",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "Retrieve all ToDo records with priority set as Medium",
-  "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
-   "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'."
-  ],
-  "code": {
-   "command": "erpnext_get_records_list",
-   "args": {
-    "doctype": "ToDo",
-    "filters": {
-     "priority": "Medium"
-    }
-   }
-  },
-  "keywords": "retrieve, ToDo records, priority, Medium, erpnext_get_records_list, doctype, ToDo, filters"
- },
- {
-  "memory_id": "os-000000013",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "- Retrieve all ToDo records with priority set as Medium",
-  "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
-   "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'."
-  ],
-  "code": {
-   "command": "erpnext_get_records_list",
-   "args": {
-    "doctype": "ToDo",
-    "filters": {
-     "priority": "Medium"
-    }
-   }
-  },
-  "keywords": "retrieve, ToDo records, priority, Medium"
- },
- {
-  "memory_id": "os-000000014",
-  "objective": "Me retorne todos os afazeres com prioridade média",
-  "task": "Retrieve all ToDo records with 'priority' field set as 'Medium'",
-  "thoughts": [
-   "To retrieve all ToDo records with priority set as 'Medium', I can use the 'erpnext_get_records_list' tool.",
-   "I need to pass the 'ToDo' doctype and a filter for the 'priority' field with the value 'Medium'."
-  ],
-  "code": {
-   "command": "erpnext_get_records_list",
-   "args": {
-    "doctype": "ToDo",
-    "filters": {
-     "priority": "Medium"
-    }
-   }
-  },
-  "keywords": "retrieve, ToDo, records, priority, Medium"
+  "keywords": "Retrieve, ToDo records, priority, Medium, extract, description field"
  }
 ]

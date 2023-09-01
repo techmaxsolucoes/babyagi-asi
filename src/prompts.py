@@ -353,6 +353,8 @@ And the accessible documents are:
     The allocated_to is "chatbot@techmaxsolucoes.com.br".
     Example : ["Get Lead ID for Joaozin", "Create a Task with the following details: - Status: Open - Priority: Medium - Date: 09/15/2025 - Allocated to: chatbot@techmaxsolucoes.com.br - Description: Meeting, - Reference Type: Lead, - Reference Name: Lead ID"]
     I shouldn't use line breaks, just like in the example
+    ATTENTION: THIS IS A SIMPLE EXAMPLE, I SHOULD NOT USE THIS DATA IN ANY WAY
+
 
 #? ANSWER FORMAT(only list [])
 My response should only be a list of tasks in the following format:

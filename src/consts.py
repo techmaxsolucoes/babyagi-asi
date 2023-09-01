@@ -21,7 +21,7 @@ TASKS_LIST = eval(os.getenv("TASKS_LIST", ""))
 PINECONE_DB = False
 SERP_API = False
 DEBUG = True
-VIEWER = False
+VIEWER = True
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY", "")
 if PINECONE_API_KEY != "":

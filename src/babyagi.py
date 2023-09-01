@@ -208,24 +208,27 @@ class AutonomousAgent:
                         pdb.set_trace()
                     if input('WANNA CONTINUE? y/N: ') not in ('YysS'):
                         sys.exit(1)
-                print(Fore.RED + f"\n\nFIXING AN ERROR: {e.__class__.__name__} {e}\n" + Fore.RESET)
-                print(f"{ct} try")
 
-                prompt = prompts.fix_agent(current_task, code, cot, e)
-                new_code = openai_call(
-                    prompt,
-                    temperature=0.4,
-                )
-                reasoning += new_code
-                reasoning = openai_call(f"I must summarize this past events as a chain of thoughts, in first person: {reasoning}", max_tokens=1000)
-                # print(new_code, end="\n")
-                try:
-                    code, cot = split_answer_and_cot(new_code)
-                    action_func = exec(code, self.__dict__)
-                    result = self.action(self)
-                    return result, code, cot
-                except Exception as e:
-                    pass
+                else:
+
+                    print(Fore.RED + f"\n\nFIXING AN ERROR: {e.__class__.__name__} {e}\n" + Fore.RESET)
+                    print(f"{ct} try")
+
+                    prompt = prompts.fix_agent(current_task, code, cot, e)
+                    new_code = openai_call(
+                        prompt,
+                        temperature=0.4,
+                    )
+                    reasoning += new_code
+                    reasoning = openai_call(f"I must summarize this past events as a chain of thoughts, in first person: {reasoning}", max_tokens=1000)
+                    # print(new_code, end="\n")
+                    try:
+                        code, cot = split_answer_and_cot(new_code)
+                        action_func = exec(code, self.__dict__)
+                        result = self.action(self)
+                        return result, code, cot
+                    except Exception as e:
+                        pass
             ct += 1
 
     def change_propagation_agent(self, _changes):
